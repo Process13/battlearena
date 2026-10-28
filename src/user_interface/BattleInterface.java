@@ -5,6 +5,12 @@ package user_interface;
 
 //Takes input from user and sends it to BattleGraphics
 
-public class BattleInterface {
+import game_classes.GameClassName;
 
+public class BattleInterface {
+    private String playerName;
+    private GameClassName PlayerClass;
+
+    public BattleInterface() {
+    }
 }

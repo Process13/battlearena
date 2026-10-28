@@ -13,6 +13,7 @@ public class StartMenu {
         // Show Name and Class (ex. Ulf the Mage)
         // 1. Start Battle
             //Start the battle
+            //BattleInterface(name, class)
         // 2. Return to Menu
         //Flush()
     // 2. Classes
