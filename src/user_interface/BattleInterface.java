@@ -1,16 +1,18 @@
 package user_interface;
 
 //Starts from StartMenu
-//IN: PlayerName, PlayerClass
+//IN: playerName, playerClass
 
 //Takes input from user and sends it to BattleGraphics
 
 import game_classes.GameClassName;
 
 public class BattleInterface {
-    private String playerName;
-    private GameClassName PlayerClass;
+    private final String playerName;
+    private final GameClassName playerClass;
 
-    public BattleInterface() {
+    public BattleInterface(String playerName, GameClassName playerClass) {
+        this.playerName = playerName;
+        this.playerClass = playerClass;
     }
 }
