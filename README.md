@@ -17,7 +17,7 @@
 
 Exempel:
 
-Warrior - 120 HP -vanlig attack gör slumpmässigt mellan 5–15 damage - specialförmåga kan exempelvis minska nästa skada
+game_classes.Warrior - 120 HP -vanlig attack gör slumpmässigt mellan 5–15 damage - specialförmåga kan exempelvis minska nästa skada
 
 Mage - 90 HP - vanlig attack gör slumpmässigt mellan 8–18 damage - kan exempelvis använda HEAL
 
@@ -27,7 +27,7 @@ Alla karaktärer ska kunna attackera.
 
 Varje karaktär ska ha någon egenskap eller förmåga som skiljer den från de andra.
 
-Exempel: en Warrior kan ha högre HP och använda DEFEND, medan en Mage kan ha lägre HP men istället använda HEAL eller en starkare specialattack. 
+Exempel: en game_classes.Warrior kan ha högre HP och använda DEFEND, medan en Mage kan ha lägre HP men istället använda HEAL eller en starkare specialattack. 
 
 **Objektorientering**
 1. Använd inkapsling, arv och polymorfism
