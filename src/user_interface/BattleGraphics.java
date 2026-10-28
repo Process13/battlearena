@@ -10,6 +10,7 @@ public class BattleGraphics {
         damageGiven()
         specialUsedOpponent()
         specialUsedSelf()
+        battleFinished(Character)
 
         75% ############----
      */
