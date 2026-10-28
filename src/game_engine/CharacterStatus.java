@@ -1,4 +1,4 @@
-package user_interface;
+package game_engine;
 
 public class CharacterStatus {
     //getRemainingHP(character)

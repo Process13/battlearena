@@ -1,13 +1,13 @@
 package game_classes;
 
-public enum GameClassNames {
+public enum GameClassName {
     WARRIOR ("Warrior"),
     MAGE ("Mage"),
     ROUGE ("Rouge");
 
     private String name;
 
-    GameClassNames(String name) {
+    GameClassName(String name) {
         this.name = name;
     }
 

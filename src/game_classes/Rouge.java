@@ -2,11 +2,17 @@ package game_classes;
 
 public class Rouge extends GameClasses {
 
-    public void attack() {
-
+    public Rouge(String CharacterName) {
+        super(CharacterName);
     }
 
-    public void special() {
+    public void damageRange() {
 
+    }
+    public void specialType() {
+
+    }
+    public int healthPoints() {
+        return 0;
     }
 }

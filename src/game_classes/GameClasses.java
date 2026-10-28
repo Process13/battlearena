@@ -1,7 +1,13 @@
 package game_classes;
 
 public abstract class GameClasses implements GameClassAttributes {
-    int healthPoints;
-    int damage;
+    private final String CharacterName;
 
+    public GameClasses(String CharacterName) {
+        this.CharacterName = CharacterName;
+    }
+
+    public String getCharacterName() {
+        return CharacterName;
+    }
 }

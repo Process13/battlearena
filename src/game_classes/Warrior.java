@@ -2,11 +2,17 @@ package game_classes;
 
 public class Warrior extends GameClasses {
 
-    public void attack() {
-
+    public Warrior(String CharacterName) {
+        super(CharacterName);
     }
 
-    public void special() {
+    public void damageRange() {
 
+    }
+    public void specialType() {
+
+    }
+    public int healthPoints() {
+        return 0;
     }
 }
