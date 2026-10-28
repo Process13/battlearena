@@ -10,6 +10,8 @@ public class BattleGraphics {
         damageGiven()
         specialUsedOpponent()
         specialUsedSelf()
+
+        75% ############----
      */
 
 }
