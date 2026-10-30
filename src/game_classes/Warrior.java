@@ -1,6 +1,6 @@
 package game_classes;
 
-public class Warrior extends GameClasses {
+public class Warrior extends GameClass {
 
     public Warrior(String CharacterName) {
         super(CharacterName);

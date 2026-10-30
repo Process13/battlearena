@@ -1,17 +1,17 @@
 package game_classes;
 
-public enum GameClassName {
+public enum GameClassType {
     WARRIOR ("Warrior"),
     MAGE ("Mage"),
     ROUGE ("Rouge");
 
     private String name;
 
-    GameClassName(String name) {
+    GameClassType(String name) {
         this.name = name;
     }
 
-    public String getGameClassName() {
+    public String getGameClassType() {
         return name;
     }
 

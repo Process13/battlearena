@@ -1,6 +1,6 @@
 package game_classes;
 
-public class Rogue extends GameClasses {
+public class Rogue extends GameClass {
 
     public Rogue(String CharacterName) {
         super(CharacterName);

@@ -1,6 +1,6 @@
 package game_classes;
 
-public class Mage extends GameClasses {
+public class Mage extends GameClass {
 
     public Mage(String CharacterName) {
         super(CharacterName);
