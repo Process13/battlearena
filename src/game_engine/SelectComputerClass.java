@@ -10,9 +10,9 @@ public class SelectComputerClass {
     private GameClasses selectedComputerClass;
 
     public void setComputerClass(){
-        //add this in GameClassName
-        //  public final static byte length = GameClassName.values().length;
-        byte amountOfClasses = GameClassName.getLength();
+        //add this in GameClassType
+        //  public final static byte length = GameClassType.values().length;
+        byte amountOfClasses = GameClassType.getLength();
 
         int classChoice = RandomRangeCalculator.getRandomNumberFromRange(1, amountOfClasses);
         // classChoice is a number that specifies witch class was chosen.
