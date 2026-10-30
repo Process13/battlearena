@@ -4,10 +4,10 @@ package game_engine;
 //OUT: One randomly selected game class
 
 import game_classes.GameClassName;
-import game_classes.GameClasses;
+import game_classes.GameClass;
 
 public class SelectComputerClass {
-    private GameClasses selectedComputerClass;
+    private GameClass selectedComputerClass;
 
     public void setComputerClass(){
         //add this in GameClassType
