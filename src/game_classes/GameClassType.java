@@ -3,7 +3,7 @@ package game_classes;
 public enum GameClassType {
     WARRIOR ("Warrior"),
     MAGE ("Mage"),
-    ROUGE ("Rouge");
+    ROGUE ("Rogue");
 
     private String name;
 
