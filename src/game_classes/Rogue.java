@@ -1,8 +1,8 @@
 package game_classes;
 
-public class Rouge extends GameClasses {
+public class Rogue extends GameClasses {
 
-    public Rouge(String CharacterName) {
+    public Rogue(String CharacterName) {
         super(CharacterName);
     }
 
