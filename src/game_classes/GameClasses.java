@@ -6,6 +6,21 @@ public abstract class GameClasses implements GameClassAttributes {
     public GameClasses(String CharacterName) {
         this.CharacterName = CharacterName;
     }
+    public int attack(){
+
+    }
+    public int takeDamage(){
+
+    }
+    public int heal(){
+
+    }
+    public boolean isAlive(){
+
+    }
+
+
+
 
     public String getCharacterName() {
         return CharacterName;
