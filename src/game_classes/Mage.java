@@ -18,5 +18,7 @@ public class Mage extends GameClass {
         return 0;
     }
 
-    public int maxHealthPoints() {return 80;}
+    public int getMaxHealthPoints() {
+        return GameClassType.MAGE.getClassMaxHp();
+    }
 }

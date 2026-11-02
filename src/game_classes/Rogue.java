@@ -17,6 +17,7 @@ public class Rogue extends GameClass {
     public int healthPoints() {
         return 0;
     }
-
-    public int maxHealthPoints() {return 110;}
+    public int getMaxHealthPoints() {
+        return GameClassType.ROGUE.getClassMaxHp();
+    }
 }

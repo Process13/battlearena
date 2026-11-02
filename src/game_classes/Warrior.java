@@ -18,6 +18,7 @@ public class Warrior extends GameClass {
         return 0;
     }
 
-    public int maxHealthPoints() {
-        return GameClassType.WARRIOR.getMaxHP();}
+    public int getMaxHealthPoints() {
+        return GameClassType.WARRIOR.getClassMaxHp();
+    }
 }

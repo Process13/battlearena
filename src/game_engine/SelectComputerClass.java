@@ -3,7 +3,7 @@ package game_engine;
 //IN: All game classes
 //OUT: One randomly selected game class
 
-import game_classes.GameClassName;
+
 import game_classes.GameClass;
 import game_classes.GameClassType;
 
