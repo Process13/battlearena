@@ -1,9 +1,11 @@
 package game_classes;
 
-public class Mage extends GameClasses {
+import java.util.Random;
 
-    public Mage(String CharacterName) {
-        super(CharacterName);
+public class Mage extends GameClass {
+
+    public Mage(String CharacterName, Random random) {
+        super(CharacterName, GameClassType.MAGE,10, 18, random);
     }
 
     public void damageRange() {
@@ -14,5 +16,9 @@ public class Mage extends GameClasses {
     }
     public int healthPoints() {
         return 0;
+    }
+
+    public int getMaxHealthPoints() {
+        return GameClassType.MAGE.getClassMaxHp();
     }
 }

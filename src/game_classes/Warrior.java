@@ -1,9 +1,11 @@
 package game_classes;
 
-public class Warrior extends GameClasses {
+import java.util.Random;
 
-    public Warrior(String CharacterName) {
-        super(CharacterName);
+public class Warrior extends GameClass {
+
+    public Warrior(String CharacterName, Random random) {
+        super(CharacterName, GameClassType.WARRIOR,9, 14, random);
     }
 
     public void damageRange() {
@@ -14,5 +16,9 @@ public class Warrior extends GameClasses {
     }
     public int healthPoints() {
         return 0;
+    }
+
+    public int getMaxHealthPoints() {
+        return GameClassType.WARRIOR.getClassMaxHp();
     }
 }
