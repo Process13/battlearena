@@ -42,4 +42,5 @@ public abstract class GameClass implements GameClassAttributes {
     public int getHealth() {
         return health;
     }
+
 }
