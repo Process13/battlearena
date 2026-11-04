@@ -37,6 +37,8 @@ public abstract class GameClass implements GameClassAttributes {
         return type;
     }
 
+
+    //setHealth() is needed
     public int getHealth() {
         return health;
     }
