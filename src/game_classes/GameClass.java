@@ -37,10 +37,12 @@ public abstract class GameClass implements GameClassAttributes {
         return type;
     }
 
-
-    //setHealth() is needed
     public int getHealth() {
         return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
     }
 
 }
