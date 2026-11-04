@@ -4,8 +4,8 @@ import java.util.Random;
 
 public class Mage extends GameClass {
 
-    public Mage(String CharacterName, Random random) {
-        super(CharacterName, GameClassType.MAGE,10, 18, random);
+    public Mage(String CharacterName) {
+        super(CharacterName, GameClassType.MAGE,10, 18);
     }
 
     public void damageRange() {

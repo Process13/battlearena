@@ -8,14 +8,12 @@ public abstract class GameClass implements GameClassAttributes {
     private int health;
     private final int minDamage;
     private final int maxDamage;
-    private final Random random;
 
-    public GameClass(String CharacterName, GameClassType type, int minDamage, int maxDamage, Random random) {
+    public GameClass(String CharacterName, GameClassType type, int minDamage, int maxDamage) {
         this.CharacterName = CharacterName;
         this.type = type;
         this.minDamage = minDamage;
         this.maxDamage = maxDamage;
-        this.random = random;
 
     }
     public int attack(GameClass target){

@@ -4,8 +4,8 @@ import java.util.Random;
 
 public class Rogue extends GameClass {
 
-    public Rogue(String CharacterName, Random random) {
-        super(CharacterName, GameClassType.ROGUE, 10, 18, random);
+    public Rogue(String CharacterName) {
+        super(CharacterName, GameClassType.ROGUE, 10, 18);
     }
 
     public void damageRange() {
