@@ -33,6 +33,7 @@ public class BattleGraphics {
         System.out.println();
         printHp(player);
         printHp(opponent);
+        System.out.println();
 
     }
 

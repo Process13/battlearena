@@ -1,5 +1,7 @@
 package user_interface;
 
+import game_classes.GameClassType;
+
 public class StartMenu {
     private final String line = "--------------------------";
 
@@ -10,11 +12,16 @@ public class StartMenu {
     }
     public void showMainMenu() {
         System.out.println("1. Play");
-        System.out.println("1. Quit");
+        System.out.println("2. Quit");
     }
     public void showGoodbyeMessage() {
         System.out.println("Goodbye!");
 
+    }
+    public void showClasses() {
+        System.out.println("1. " + GameClassType.WARRIOR.getClassName());
+        System.out.println("2. " + GameClassType.MAGE.getClassName());
+        System.out.println("3. " + GameClassType.ROGUE.getClassName());
     }
 
     // Flush()
