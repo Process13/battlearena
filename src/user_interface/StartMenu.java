@@ -1,6 +1,22 @@
 package user_interface;
 
 public class StartMenu {
+    private final String line = "--------------------------";
+
+    public void showWelcomeMessage() {
+        System.out.println(line);
+        System.out.println("       BATTLE ARENA       ");
+        System.out.println(line);
+    }
+    public void showMainMenu() {
+        System.out.println("1. Play");
+        System.out.println("1. Quit");
+    }
+    public void showGoodbyeMessage() {
+        System.out.println("Goodbye!");
+
+    }
+
     // Flush()
     // 1. Start
         //  -1-
