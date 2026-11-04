@@ -58,7 +58,7 @@ public class TestComputerActions {
     void computerRougeShouldBeAbleToDoubleAttack() {
         opponent.setHealth(80);
         computerAction.useSpecial(rogue);
-        assert
+        assertEquals(60, opponent.getHealth());
     }
 
 
