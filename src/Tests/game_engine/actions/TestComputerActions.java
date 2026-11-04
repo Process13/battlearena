@@ -55,7 +55,7 @@ public class TestComputerActions {
         assertTrue(mage.getHealth() > 20);
     }
     @Test
-    void computerRougeShouldBeAbleToDoubleAttack() {
+    void computerRougeSpecialActionShouldDeal20Damage() {
         opponent.setHealth(80);
         computerAction.useSpecial(rogue);
         assertEquals(60, opponent.getHealth());
