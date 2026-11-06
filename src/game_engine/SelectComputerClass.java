@@ -6,7 +6,7 @@ package game_engine;
 
 import game_classes.GameClass;
 import game_classes.GameClassType;
-
+/*
 public class SelectComputerClass {
     private GameClass selectedComputerClass;
 
@@ -20,3 +20,6 @@ public class SelectComputerClass {
     }
 
 }
+
+ */
+
