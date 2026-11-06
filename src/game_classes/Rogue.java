@@ -8,18 +8,16 @@ public class Rogue extends GameClass {
     private static final int MIN_DAMAGE = 9;
 
     public Rogue(String CharacterName) {
-        super(CharacterName, GameClassType.ROGUE, 10, 18);
+        super(CharacterName, GameClassType.ROGUE);
     }
 
     public int[] getDamageRange() {
         return new int[]{MAX_DAMAGE, MIN_DAMAGE};
     }
-    public void specialType() {
+    public void specialAbility() {
 
     }
-    public int healthPoints() {
-        return 0;
-    }
+
     public int getMaxHealthPoints() {
         return MAX_HEALTH_ROUGE;
     }

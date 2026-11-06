@@ -8,17 +8,14 @@ public class Mage extends GameClass {
     private static final int MIN_DAMAGE = 10;
 
     public Mage(String CharacterName) {
-        super(CharacterName, GameClassType.MAGE,10, 18);
+        super(CharacterName, GameClassType.MAGE);
     }
 
     public int[] getDamageRange() {
         return new int[]{MAX_DAMAGE, MIN_DAMAGE};
     }
-    public void specialType() {
+    public void specialAbility() {
 
-    }
-    public int healthPoints() {
-        return 0;
     }
 
     public int getMaxHealthPoints() {
