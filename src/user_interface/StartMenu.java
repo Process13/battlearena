@@ -12,7 +12,8 @@ public class StartMenu {
     }
     public void showMainMenu() {
         System.out.println("1. Play");
-        System.out.println("2. Quit");
+        System.out.println("2. Show classes");
+        System.out.println("3. Quit");
     }
     public void showGoodbyeMessage() {
         System.out.println("Goodbye!");
@@ -23,6 +24,12 @@ public class StartMenu {
         System.out.println("2. " + GameClassType.MAGE.getClassName());
         System.out.println("3. " + GameClassType.ROGUE.getClassName());
     }
+    public void showWinner(String playerName) {
+        System.out.println(line);
+        if ()
+
+    }
+
 
     // Flush()
     // 1. Start
