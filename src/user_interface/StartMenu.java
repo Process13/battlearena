@@ -1,6 +1,7 @@
 package user_interface;
 
 import game_classes.GameClassType;
+import game_classes.Winner;
 
 public class StartMenu {
     private final String line = "--------------------------";
@@ -24,9 +25,15 @@ public class StartMenu {
         System.out.println("2. " + GameClassType.MAGE.getClassName());
         System.out.println("3. " + GameClassType.ROGUE.getClassName());
     }
-    public void showWinner(String playerName) {
+    public void showWinner(Winner winner, String playerName) {
         System.out.println(line);
-        if ()
+        if (winner == Winner.PLAYER)
+            {
+            System.out.println("Player " + playerName + " won!");
+            }
+        else {
+            System.out.println("The Computer won!");
+        }
 
     }
 
