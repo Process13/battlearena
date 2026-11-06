@@ -6,16 +6,12 @@ public abstract class GameClass implements GameClassAttributes {
     private final String CharacterName;
     private final GameClassType type;
     private int health;
-    private final int minDamage;
-    private final int maxDamage;
 
-    public GameClass(String CharacterName, GameClassType type, int minDamage, int maxDamage) {
+    public GameClass(String CharacterName, GameClassType type) {
         this.CharacterName = CharacterName;
         this.type = type;
-        this.minDamage = minDamage;
-        this.maxDamage = maxDamage;
-
     }
+    /*
     public int attack(GameClass target){
 
     }
@@ -28,6 +24,8 @@ public abstract class GameClass implements GameClassAttributes {
     public boolean isAlive(){
 
     }
+
+     */
 
     public String getCharacterName() {
         return CharacterName;
