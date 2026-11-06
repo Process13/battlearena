@@ -5,7 +5,8 @@ package game_engine;
 
 public class RandomRangeCalculator {
     public int getRandomNumberFromRange(int lowerRange, int higherRange) {
-        return randomNumberFromRange;
+        return 15;
+        //return randomNumberFromRange;
     }
 
 }
