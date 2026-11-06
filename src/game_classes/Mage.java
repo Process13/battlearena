@@ -3,13 +3,16 @@ package game_classes;
 import java.util.Random;
 
 public class Mage extends GameClass {
+    private static final int MAX_HEALTH_MAGE = 80;
+    private static final int MAX_DAMAGE = 18;
+    private static final int MIN_DAMAGE = 10;
 
     public Mage(String CharacterName) {
         super(CharacterName, GameClassType.MAGE,10, 18);
     }
 
-    public void damageRange() {
-
+    public int[] getDamageRange() {
+        return new int[]{MAX_DAMAGE, MIN_DAMAGE};
     }
     public void specialType() {
 
@@ -19,6 +22,6 @@ public class Mage extends GameClass {
     }
 
     public int getMaxHealthPoints() {
-        return GameClassType.MAGE.getClassMaxHp();
+        return MAX_HEALTH_MAGE;
     }
 }

@@ -3,16 +3,19 @@ package game_classes;
 import java.util.Random;
 
 public class Warrior extends GameClass {
+    private static final int MAX_HEALTH_WARRIOR = 150;
+    private static final int MAX_DAMAGE = 14;
+    private static final int MIN_DAMAGE = 9;
 
     public Warrior(String CharacterName) {
         super(CharacterName, GameClassType.WARRIOR,9, 14);
     }
 
-    public void damageRange() {
-
+    public int[] getDamageRange() {
+        return new int[]{MAX_DAMAGE, MIN_DAMAGE};
     }
-    //rename to specialAbility
-    public void specialType() {
+
+    public void specialAbility() {
 
     }
     public int healthPoints() {
@@ -20,6 +23,6 @@ public class Warrior extends GameClass {
     }
 
     public int getMaxHealthPoints() {
-        return GameClassType.WARRIOR.getClassMaxHp();
+        return MAX_HEALTH_WARRIOR;
     }
 }
