@@ -8,7 +8,7 @@ public class Warrior extends GameClass {
     private static final int MIN_DAMAGE = 9;
 
     public Warrior(String CharacterName) {
-        super(CharacterName, GameClassType.WARRIOR,9, 14);
+        super(CharacterName, GameClassType.WARRIOR);
     }
 
     public int[] getDamageRange() {
@@ -17,9 +17,6 @@ public class Warrior extends GameClass {
 
     public void specialAbility() {
 
-    }
-    public int healthPoints() {
-        return 0;
     }
 
     public int getMaxHealthPoints() {
