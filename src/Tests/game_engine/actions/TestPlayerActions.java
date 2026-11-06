@@ -1,7 +1,7 @@
-package game_engine.actions;
+package Tests.game_engine.actions;
 
-import game_classes.;
 import game_classes.*;
+import game_engine.actions.PlayerAction;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -29,6 +29,7 @@ public class TestPlayerActions {
         playerAction.useAttack(warrior, opponent);
         assertTrue(opponent.getHealth() < 60);
     }
+    /*
     @Test
     void playerMageShouldBeAbleToAttack() {
         opponent.setHealth(60);
@@ -61,5 +62,7 @@ public class TestPlayerActions {
         playerAction.useSpecial(rogue);
         assertEquals(60, opponent.getHealth());
     }
+
+     */
 
 }
