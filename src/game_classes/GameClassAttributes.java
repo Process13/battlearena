@@ -1,7 +1,7 @@
 package game_classes;
 
 public interface GameClassAttributes {
-    void damageRange();
+    int[] getDamageRange();
     void specialType();
     int healthPoints();
 }
