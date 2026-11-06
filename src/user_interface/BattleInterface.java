@@ -28,7 +28,7 @@ public class BattleInterface {
             if (!name.isEmpty()) {
                 return name;
             }
-            System.out.println("Please enter your name: ");
+            System.out.println("Name can not be empty");
         }
     }
     // Skriver ut en lista på valbara karaktärer och låter användaren göra ett val
