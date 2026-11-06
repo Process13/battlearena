@@ -12,7 +12,7 @@ public class Warrior extends GameClass {
     }
 
     public int[] getDamageRange() {
-        return new int[]{MAX_DAMAGE, MIN_DAMAGE};
+        return new int[]{MIN_DAMAGE, MAX_DAMAGE};
     }
 
     public void specialAbility() {
