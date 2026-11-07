@@ -24,6 +24,8 @@ public class TestComputerActions {
         opponent = new Warrior("Opponent");
     }
 
+    /////////////////////////////////////////////////////////////
+
     @Test
     void computerWarriorShouldBeAbleToAttack() {
         opponent.setHealth(60);
@@ -46,11 +48,13 @@ public class TestComputerActions {
                 lowest = opponent.getHealth();
             if (opponent.getHealth()>highest)
                 highest = opponent.getHealth();
-            assertTrue(opponent.getHealth() <= 80 && opponent.getHealth() >= 1);
+            assertTrue(opponent.getHealth() >= 46 && opponent.getHealth() <= 51);
         }
-        System.out.println("Lowest: " + lowest + "\nHighest: " + highest);
+        System.out.println(warrior.getType().getClassName() + "\nLowest: " + lowest + "\nHighest: " + highest + '\n');
     }
-    /*
+
+    /////////////////////////////////////////////////////////////
+
     @Test
     void computerMageShouldBeAbleToAttack() {
         opponent.setHealth(60);
@@ -58,12 +62,58 @@ public class TestComputerActions {
         assertTrue(opponent.getHealth() < 60);
     }
     @Test
+    void computerMageShouldReceiveCorrectDamageRangeValues() {
+        int[] damageRange = mage.getDamageRange();
+        assertEquals(10, damageRange[0]);
+        assertEquals(18, damageRange[1]);
+    }
+    @Test
+    void computerMageDealtDamageWithinTheCorrectRange() {
+        int lowest = 60, highest = 0;
+        for (int i = 0; i < 10000; i++){
+            opponent.setHealth(60);
+            computerAction.useAttack(mage, opponent);
+            if (opponent.getHealth()<lowest)
+                lowest = opponent.getHealth();
+            if (opponent.getHealth()>highest)
+                highest = opponent.getHealth();
+            assertTrue(opponent.getHealth() >= 42 && opponent.getHealth() <= 50);
+        }
+        System.out.println(mage.getType().getClassName() + "\nLowest: " + lowest + "\nHighest: " + highest + '\n');
+    }
+
+    /////////////////////////////////////////////////////////////
+
+    @Test
     void computerRogueShouldBeAbleToAttack() {
         opponent.setHealth(60);
         computerAction.useAttack(rogue, opponent);
         assertTrue(opponent.getHealth() < 60);
     }
+    @Test
+    void computerRogueShouldReceiveCorrectDamageRangeValues() {
+        int[] damageRange = rogue.getDamageRange();
+        assertEquals(9, damageRange[0]);
+        assertEquals(14, damageRange[1]);
+    }
+    @Test
+    void computerRogueDealtDamageWithinTheCorrectRange() {
+        int lowest = 60, highest = 0;
+        for (int i = 0; i < 10000; i++){
+            opponent.setHealth(60);
+            computerAction.useAttack(rogue, opponent);
+            if (opponent.getHealth()<lowest)
+                lowest = opponent.getHealth();
+            if (opponent.getHealth()>highest)
+                highest = opponent.getHealth();
+            assertTrue(opponent.getHealth() >= 46 && opponent.getHealth() <= 51);
+        }
+        System.out.println(rogue.getType().getClassName() + "\nLowest: " + lowest + "\nHighest: " + highest + '\n');
+    }
 
+    /////////////////////////////////////////////////////////////
+
+    /*
     @Test
     void computerWarriorShouldBeAbleToDefend() {
         warrior.setHealth(80);
