@@ -17,7 +17,6 @@ public class TestGameClassFactory {
         gameClassFactory = new GameClassFactory();
     }
 
-
     @Test
     public void createGameClassShouldCreateWarrior() {
         //Act
@@ -25,6 +24,7 @@ public class TestGameClassFactory {
         //Assert
         assertEquals("Orc", warrior.getCharacterName());
     }
+
     @Test
     public void createGameClassShouldCreateMage() {
         //Act
@@ -32,6 +32,7 @@ public class TestGameClassFactory {
         //Assert
         assertEquals("Elf", mage.getCharacterName());
     }
+
     @Test
     public void createGameClassShouldCreateRogue() {
         //Act
@@ -39,6 +40,7 @@ public class TestGameClassFactory {
         //Assert
         assertEquals("Human", rogue.getCharacterName());
     }
+
     @Test
     public void createRandomGameClassShouldReturnRandomGameClass() {
         GameClass random = gameClassFactory.createRandomGameClass("Computer");
