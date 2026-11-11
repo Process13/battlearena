@@ -4,5 +4,5 @@ import game_classes.GameClass;
 
 public interface GameActions {
     void useAttack(GameClass self, GameClass oponent);
-    void useSpecial();
+    void useSpecial(GameClass self);
 }
