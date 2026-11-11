@@ -122,25 +122,69 @@ public class TestComputerActions {
     @Test
     void computerWarriorShouldBeAbleToHalveDamageFromNextIncomingAttack() {
         warrior.setHealth(80);
-        computerAction.useSpecial(warrior);
-        warrior.takeDamage(30);
+        computerAction.useSpecial(warrior, opponent);
+        warrior.takeDamage(30, false);
         assertEquals(65, warrior.getHealth());
     }
-    /*
     @Test
-    void computerMageShouldBeAbleToHeal(){
-        mage.setHealth(20);
-        computerAction.useSpecial(mage);
-        assertTrue(mage.getHealth() > 20);
+    void computerWarriorShouldOnlyBeAbleToHalveDamageOnOneAttack() {
+        warrior.setHealth(100);
+        warrior.takeDamage(20, false);
+        assertEquals(80, warrior.getHealth());
+        computerAction.useSpecial(warrior, opponent);
+        warrior.takeDamage(20, false);
+        assertEquals(70, warrior.getHealth());
+        warrior.takeDamage(20, false);
+        assertEquals(50, warrior.getHealth());
     }
+    @Test
+    void computerWarriorShouldNotBeAbleToBlockPiercingAttacks() {
+        warrior.setHealth(80);
+        computerAction.useSpecial(warrior, opponent);
+        warrior.takeDamage(40, true);
+        assertEquals(40, warrior.getHealth());
+    }
+    @Test
+    void computerWarriorShouldRetainBlockAfterAPiercingAttack() {
+        warrior.setHealth(80);
+        computerAction.useSpecial(warrior, opponent);
+        warrior.takeDamage(40, true);
+        assertEquals(40, warrior.getHealth());
+        warrior.takeDamage(40, false);
+        assertEquals(20, warrior.getHealth());
+    }
+
+    /////////////////////////////////////////////////////////////
+
+    @Test
+    void computerMageShouldBeAbleToHeal25(){
+        mage.setHealth(20);
+        computerAction.useSpecial(mage, opponent);
+        assertEquals(45, mage.getHealth());
+    }
+    @Test
+    void computerMageHealShouldNotExceedMaxHitPoints(){
+        mage.setHealth(mage.getMaxHealthPoints()-5);
+        computerAction.useSpecial(mage, opponent);
+        assertEquals(mage.getMaxHealthPoints(), mage.getHealth());
+    }
+
+    /////////////////////////////////////////////////////////////
+
     @Test
     void computerRougeSpecialActionShouldDeal20Damage() {
         opponent.setHealth(80);
-        computerAction.useSpecial(rogue);
+        computerAction.useSpecial(rogue, opponent);
         assertEquals(60, opponent.getHealth());
     }
-
-     */
+    @Test
+    void computerRougeSpecialActionShouldDealDamageThroughDefending() {
+        opponent.setHealth(80);
+        computerAction.useSpecial(opponent, rogue);
+        computerAction.useSpecial(rogue, opponent);
+        assertTrue(opponent.getDefending());
+        assertEquals(60, opponent.getHealth());
+    }
 
 
 }
