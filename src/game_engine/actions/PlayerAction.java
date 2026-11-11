@@ -16,6 +16,7 @@ public class PlayerAction extends ComputerAction implements GameActions {
         opponent.setHealth(opponent.getHealth()-damageDealt);
     }
     @Override
-    public void useSpecial(GameClass player) {
+    public void useSpecial(GameClass player, GameClass opponent) {
+        player.specialAbility(opponent);
     }
 }

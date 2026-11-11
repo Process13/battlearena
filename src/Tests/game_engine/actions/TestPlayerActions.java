@@ -119,27 +119,71 @@ public class TestPlayerActions {
 
     /////////////////////////////////////////////////////////////
 
-/*
     @Test
-    void playerWarriorShouldBeAbleToDefend() {
+    void playerWarriorShouldBeAbleToHalveDamageFromNextIncomingAttack() {
         warrior.setHealth(80);
-        playerAction.useSpecial(warrior);
-        warrior.takeDamage(30);
+        playerAction.useSpecial(warrior, opponent);
+        warrior.takeDamage(30, false);
         assertEquals(65, warrior.getHealth());
     }
     @Test
-    void playerMageShouldBeAbleToHeal(){
-        mage.setHealth(20);
-        playerAction.useSpecial(mage);
-        assertTrue(mage.getHealth() > 20);
+    void playerWarriorShouldOnlyBeAbleToHalveDamageOnOneAttack() {
+        warrior.setHealth(100);
+        warrior.takeDamage(20, false);
+        assertEquals(80, warrior.getHealth());
+        playerAction.useSpecial(warrior, opponent);
+        warrior.takeDamage(20, false);
+        assertEquals(70, warrior.getHealth());
+        warrior.takeDamage(20, false);
+        assertEquals(50, warrior.getHealth());
     }
     @Test
-    void playerRougeShouldBeAbleToDeal20Damage() {
-        opponent.setHealth(80);
-        playerAction.useSpecial(rogue);
-        assertEquals(60, opponent.getHealth());
+    void playerWarriorShouldNotBeAbleToBlockPiercingAttacks() {
+        warrior.setHealth(80);
+        playerAction.useSpecial(warrior, opponent);
+        warrior.takeDamage(40, true);
+        assertEquals(40, warrior.getHealth());
+    }
+    @Test
+    void playerWarriorShouldRetainBlockAfterAPiercingAttack() {
+        warrior.setHealth(80);
+        playerAction.useSpecial(warrior, opponent);
+        warrior.takeDamage(40, true);
+        assertEquals(40, warrior.getHealth());
+        warrior.takeDamage(40, false);
+        assertEquals(20, warrior.getHealth());
     }
 
-     */
+    /////////////////////////////////////////////////////////////
+
+    @Test
+    void playerMageShouldBeAbleToHeal25(){
+        mage.setHealth(20);
+        playerAction.useSpecial(mage, opponent);
+        assertEquals(45, mage.getHealth());
+    }
+    @Test
+    void playerMageHealShouldNotExceedMaxHitPoints(){
+        mage.setHealth(mage.getMaxHealthPoints()-5);
+        playerAction.useSpecial(mage, opponent);
+        assertEquals(mage.getMaxHealthPoints(), mage.getHealth());
+    }
+
+    /////////////////////////////////////////////////////////////
+
+    @Test
+    void playerRougeSpecialActionShouldDeal20Damage() {
+        opponent.setHealth(80);
+        playerAction.useSpecial(rogue, opponent);
+        assertEquals(60, opponent.getHealth());
+    }
+    @Test
+    void playerRougeSpecialActionShouldDealDamageThroughDefending() {
+        opponent.setHealth(80);
+        playerAction.useSpecial(opponent, rogue);
+        playerAction.useSpecial(rogue, opponent);
+        assertTrue(opponent.getDefending());
+        assertEquals(60, opponent.getHealth());
+    }
 
 }

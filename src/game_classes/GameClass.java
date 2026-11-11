@@ -1,7 +1,5 @@
 package game_classes;
 
-import java.util.Random;
-
 public abstract class GameClass implements GameClassAttributes {
     private final String CharacterName;
     private final GameClassType type;
@@ -18,19 +16,23 @@ public abstract class GameClass implements GameClassAttributes {
     }
 
      */
-    public void takeDamage(int amount){
-        if (defending){
+    public void takeDamage(int amount, boolean piercing){
+        if (defending && !piercing){
             amount = amount/2;
             defending = false;
         }
         if (health <= amount){
             //Character is defeated
         }
-        health = health-amount;
+        health = health - amount;
 
     }
     public void heal(int amount){
-
+        if (health >= getMaxHealthPoints() - amount) {
+            health = getMaxHealthPoints();
+            return;
+        }
+        health = health + amount;
     }
     //public boolean isAlive(){
 
@@ -50,6 +52,10 @@ public abstract class GameClass implements GameClassAttributes {
 
     public void setHealth(int health) {
         this.health = health;
+    }
+
+    public boolean getDefending() {
+        return defending;
     }
 
 }

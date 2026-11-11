@@ -1,7 +1,5 @@
 package game_classes;
 
-import java.util.Random;
-
 public class Warrior extends GameClass {
     private static final int MAX_HEALTH_WARRIOR = 150;
     private static final int MAX_DAMAGE = 14;
@@ -15,7 +13,7 @@ public class Warrior extends GameClass {
         return new int[]{MIN_DAMAGE, MAX_DAMAGE};
     }
 
-    public void specialAbility() {
+    public void specialAbility(GameClass opponent) {
         defending = true;
     }
 
