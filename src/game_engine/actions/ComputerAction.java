@@ -11,9 +11,9 @@ public class ComputerAction implements GameActions {
     public void useAttack(GameClass computer, GameClass opponent) {
         int[] damageRange = computer.getDamageRange();
         int damageDealt = damageCalculator.getRandomNumberFromRange(damageRange[0],damageRange[1]);
-        opponent.setHealth(opponent.getHealth()-damageDealt);
+        opponent.takeDamage(damageDealt, false);
     }
-    public void useSpecial(GameClass computer) {
-        computer.specialAbility();
+    public void useSpecial(GameClass computer, GameClass opponent){
+        computer.specialAbility(opponent);
     }
 }
