@@ -6,6 +6,7 @@ public abstract class GameClass implements GameClassAttributes {
     private final String CharacterName;
     private final GameClassType type;
     private int health;
+    protected boolean defending = false;
 
     public GameClass(String CharacterName, GameClassType type) {
         this.CharacterName = CharacterName;
@@ -15,17 +16,25 @@ public abstract class GameClass implements GameClassAttributes {
     public int attack(GameClass target){
 
     }
-    public int takeDamage(int amount){
-
-    }
-    public int heal(int amount){
-
-    }
-    public boolean isAlive(){
-
-    }
 
      */
+    public void takeDamage(int amount){
+        if (defending){
+            amount = amount/2;
+            defending = false;
+        }
+        if (health <= amount){
+            //Character is defeated
+        }
+        health = health-amount;
+
+    }
+    public void heal(int amount){
+
+    }
+    //public boolean isAlive(){
+
+    //}
 
     public String getCharacterName() {
         return CharacterName;
