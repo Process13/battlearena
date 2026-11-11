@@ -3,21 +3,22 @@ package game_classes;
 import java.util.Random;
 
 public class Rogue extends GameClass {
+    private static final int MAX_HEALTH_ROUGE = 110;
+    private static final int MAX_DAMAGE = 14;
+    private static final int MIN_DAMAGE = 9;
 
-    public Rogue(String CharacterName, Random random) {
-        super(CharacterName, GameClassType.ROGUE, 10, 18, random);
+    public Rogue(String CharacterName) {
+        super(CharacterName, GameClassType.ROGUE);
     }
 
-    public void damageRange() {
+    public int[] getDamageRange() {
+        return new int[]{MIN_DAMAGE, MAX_DAMAGE};
+    }
+    public void specialAbility() {
 
     }
-    public void specialType() {
 
-    }
-    public int healthPoints() {
-        return 0;
-    }
     public int getMaxHealthPoints() {
-        return GameClassType.ROGUE.getClassMaxHp();
+        return MAX_HEALTH_ROUGE;
     }
 }

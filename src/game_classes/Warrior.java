@@ -3,22 +3,23 @@ package game_classes;
 import java.util.Random;
 
 public class Warrior extends GameClass {
+    private static final int MAX_HEALTH_WARRIOR = 150;
+    private static final int MAX_DAMAGE = 14;
+    private static final int MIN_DAMAGE = 9;
 
-    public Warrior(String CharacterName, Random random) {
-        super(CharacterName, GameClassType.WARRIOR,9, 14, random);
+    public Warrior(String CharacterName) {
+        super(CharacterName, GameClassType.WARRIOR);
     }
 
-    public void damageRange() {
-
+    public int[] getDamageRange() {
+        return new int[]{MIN_DAMAGE, MAX_DAMAGE};
     }
-    public void specialType() {
 
-    }
-    public int healthPoints() {
-        return 0;
+    public void specialAbility() {
+        defending = true;
     }
 
     public int getMaxHealthPoints() {
-        return GameClassType.WARRIOR.getClassMaxHp();
+        return MAX_HEALTH_WARRIOR;
     }
 }

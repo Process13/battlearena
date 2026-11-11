@@ -11,6 +11,8 @@ public class GameClassFactory {
         this.random =  Objects.requireNonNull(random, "random");
     }
 
+
+    /*
     //Metod för att generera en karaktär åt användaren
     public GameClass createGameClass(GameClassType type, String name) {
         //switch för att välja typ av karaktär?
@@ -20,5 +22,7 @@ public class GameClassFactory {
         //ta in klasstyperna
         //plocka ut och returnera en random klasstyp till datorn
     }
+
+     */
 
 }

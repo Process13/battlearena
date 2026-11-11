@@ -6,30 +6,35 @@ public abstract class GameClass implements GameClassAttributes {
     private final String CharacterName;
     private final GameClassType type;
     private int health;
-    private final int minDamage;
-    private final int maxDamage;
-    private final Random random;
+    protected boolean defending = false;
 
-    public GameClass(String CharacterName, GameClassType type, int minDamage, int maxDamage, Random random) {
+    public GameClass(String CharacterName, GameClassType type) {
         this.CharacterName = CharacterName;
         this.type = type;
-        this.minDamage = minDamage;
-        this.maxDamage = maxDamage;
-        this.random = random;
-
     }
+    /*
     public int attack(GameClass target){
 
     }
-    public int takeDamage(int amount){
+
+     */
+    public void takeDamage(int amount){
+        if (defending){
+            amount = amount/2;
+            defending = false;
+        }
+        if (health <= amount){
+            //Character is defeated
+        }
+        health = health-amount;
 
     }
-    public int heal(int amount){
+    public void heal(int amount){
 
     }
-    public boolean isAlive(){
+    //public boolean isAlive(){
 
-    }
+    //}
 
     public String getCharacterName() {
         return CharacterName;
@@ -41,6 +46,10 @@ public abstract class GameClass implements GameClassAttributes {
 
     public int getHealth() {
         return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
     }
 
 }
