@@ -16,7 +16,7 @@ public class Warrior extends GameClass {
     }
 
     public void specialAbility() {
-
+        defending = true;
     }
 
     public int getMaxHealthPoints() {
