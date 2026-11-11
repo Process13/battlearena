@@ -50,7 +50,9 @@ public class TestComputerActions {
                 highest = opponent.getHealth();
             assertTrue(opponent.getHealth() >= 46 && opponent.getHealth() <= 51);
         }
-        System.out.println(warrior.getType().getClassName() + "\nLowest: " + lowest + "\nHighest: " + highest + '\n');
+        System.out.println(warrior.getType().getClassName() +
+                "\nMost damage taken: " + (60 - lowest) +
+                "\nLeast damage taken: " + (60 - highest) + '\n');
     }
 
     /////////////////////////////////////////////////////////////
@@ -79,7 +81,9 @@ public class TestComputerActions {
                 highest = opponent.getHealth();
             assertTrue(opponent.getHealth() >= 42 && opponent.getHealth() <= 50);
         }
-        System.out.println(mage.getType().getClassName() + "\nLowest: " + lowest + "\nHighest: " + highest + '\n');
+        System.out.println(mage.getType().getClassName() +
+                "\nMost damage taken: " + (60 - lowest) +
+                "\nLeast damage taken: " + (60 - highest) + '\n');
     }
 
     /////////////////////////////////////////////////////////////
@@ -108,19 +112,21 @@ public class TestComputerActions {
                 highest = opponent.getHealth();
             assertTrue(opponent.getHealth() >= 46 && opponent.getHealth() <= 51);
         }
-        System.out.println(rogue.getType().getClassName() + "\nLowest: " + lowest + "\nHighest: " + highest + '\n');
+        System.out.println(rogue.getType().getClassName() +
+                "\nMost damage taken: " + (60 - lowest) +
+                "\nLeast damage taken: " + (60 - highest) + '\n');
     }
 
     /////////////////////////////////////////////////////////////
 
-    /*
     @Test
-    void computerWarriorShouldBeAbleToDefend() {
+    void computerWarriorShouldBeAbleToHalveDamageFromNextIncomingAttack() {
         warrior.setHealth(80);
         computerAction.useSpecial(warrior);
         warrior.takeDamage(30);
         assertEquals(65, warrior.getHealth());
     }
+    /*
     @Test
     void computerMageShouldBeAbleToHeal(){
         mage.setHealth(20);
