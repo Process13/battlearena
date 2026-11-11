@@ -1,9 +1,5 @@
 package game_classes;
 
-import game_engine.actions.ComputerAction;
-
-import java.util.Random;
-
 public class Rogue extends GameClass {
     private static final int MAX_HEALTH_ROUGE = 110;
     private static final int MAX_DAMAGE = 14;

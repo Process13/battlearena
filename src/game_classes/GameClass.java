@@ -1,7 +1,5 @@
 package game_classes;
 
-import java.util.Random;
-
 public abstract class GameClass implements GameClassAttributes {
     private final String CharacterName;
     private final GameClassType type;
