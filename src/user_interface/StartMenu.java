@@ -1,6 +1,43 @@
 package user_interface;
 
+import game_classes.GameClassType;
+import game_classes.Winner;
+
 public class StartMenu {
+    private final String line = "--------------------------";
+
+    public void showWelcomeMessage() {
+        System.out.println(line);
+        System.out.println("       BATTLE ARENA       ");
+        System.out.println(line);
+    }
+    public void showMainMenu() {
+        System.out.println("1. Play");
+        System.out.println("2. Show classes");
+        System.out.println("3. Quit");
+    }
+    public void showGoodbyeMessage() {
+        System.out.println("Goodbye!");
+
+    }
+    public void showClasses() {
+        System.out.println("1. " + GameClassType.WARRIOR.getClassName());
+        System.out.println("2. " + GameClassType.MAGE.getClassName());
+        System.out.println("3. " + GameClassType.ROGUE.getClassName());
+    }
+    public void showWinner(Winner winner, String playerName) {
+        System.out.println(line);
+        if (winner == Winner.PLAYER)
+            {
+            System.out.println("Player " + playerName + " won!");
+            }
+        else {
+            System.out.println("The Computer won!");
+        }
+
+    }
+
+
     // Flush()
     // 1. Start
         //  -1-
