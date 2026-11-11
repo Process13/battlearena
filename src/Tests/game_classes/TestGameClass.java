@@ -1,4 +1,4 @@
-package game_classes;
+package Tests.game_classes;
 
 public class TestGameClass {
 }

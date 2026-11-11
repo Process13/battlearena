@@ -1,4 +1,4 @@
-package game_engine.actions;
+package Tests.game_engine.actions;
 
 import game_classes.*;
 import game_engine.actions.PlayerAction;

@@ -1,4 +1,4 @@
-package game_engine;
+package Tests.game_engine;
 
 public class TestCharacterStatus {
 }
