@@ -19,25 +19,19 @@ public class TestGameClassFactory {
 
     @Test
     public void createGameClassShouldCreateWarrior() {
-        //Act
         GameClass warrior = gameClassFactory.createGameClass(GameClassType.WARRIOR, "Orc");
-        //Assert
         assertEquals("Orc", warrior.getCharacterName());
     }
 
     @Test
     public void createGameClassShouldCreateMage() {
-        //Act
         GameClass mage = gameClassFactory.createGameClass(GameClassType.MAGE, "Elf");
-        //Assert
         assertEquals("Elf", mage.getCharacterName());
     }
 
     @Test
     public void createGameClassShouldCreateRogue() {
-        //Act
         GameClass rogue = gameClassFactory.createGameClass(GameClassType.ROGUE, "Human");
-        //Assert
         assertEquals("Human", rogue.getCharacterName());
     }
 
