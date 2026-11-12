@@ -6,6 +6,7 @@ public abstract class GameClass implements GameClassAttributes {
     private int health;
     protected boolean defending = false;
     private boolean alive = true;
+    private boolean specialUsed = false;
 
     public GameClass(String CharacterName, GameClassType type) {
         this.CharacterName = CharacterName;
@@ -36,7 +37,7 @@ public abstract class GameClass implements GameClassAttributes {
         }
         health = health + amount;
     }
-    public boolean isAlive(){
+    public boolean getAlive(){
         return alive;
     }
 
@@ -60,4 +61,11 @@ public abstract class GameClass implements GameClassAttributes {
         return defending;
     }
 
+    public boolean isSpecialUsed() {
+        return specialUsed;
+    }
+
+    public void setSpecialUsed(boolean specialUsed) {
+        this.specialUsed = specialUsed;
+    }
 }
