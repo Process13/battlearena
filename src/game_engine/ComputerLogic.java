@@ -17,10 +17,9 @@ public class ComputerLogic {
         return gameClassFactory.createRandomGameClass("Computer");
     }
 
-    void computerWarrior(GameClass computer){
+    public void computerWarrior(GameClass computer){
         if (!computer.isSpecialUsed()){
             computerAction.useSpecial(computer, opponent);
-            return;
         } else {
             computerAction.useAttack(computer, opponent);
         }
