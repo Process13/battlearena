@@ -9,9 +9,9 @@ import game_classes.Warrior;
 import game_engine.actions.ComputerAction;
 
 public class ComputerLogic {
-    GameClassFactory gameClassFactory = new GameClassFactory();
-    GameClass opponent = new Warrior("opponent");
-    ComputerAction computerAction = new ComputerAction();
+    private GameClassFactory gameClassFactory = new GameClassFactory();
+    private GameClass opponent = new Warrior("opponent");
+    private ComputerAction computerAction = new ComputerAction();
 
     public GameClass createComputerCharacter(){
         return gameClassFactory.createRandomGameClass("Computer");
