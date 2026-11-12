@@ -15,5 +15,6 @@ public class ComputerAction implements GameActions {
     }
     public void useSpecial(GameClass computer, GameClass opponent){
         computer.specialAbility(opponent);
+        computer.setSpecialUsed(true);
     }
 }
