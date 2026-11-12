@@ -1,6 +1,7 @@
-package game_classes;
+package game_engine;
 
-import java.util.Objects;
+import game_classes.*;
+
 import java.util.Random;
 
 // Class for generating a character for the player and make a random character for the computer
