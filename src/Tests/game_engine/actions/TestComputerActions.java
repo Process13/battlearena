@@ -25,6 +25,7 @@ public class TestComputerActions {
     }
 
     /////////////////////////////////////////////////////////////
+    /// Computer Warrior Attack Action
 
     @Test
     void computerWarriorShouldBeAbleToAttack() {
@@ -56,6 +57,7 @@ public class TestComputerActions {
     }
 
     /////////////////////////////////////////////////////////////
+    /// Computer Mage Attack Action
 
     @Test
     void computerMageShouldBeAbleToAttack() {
@@ -87,6 +89,7 @@ public class TestComputerActions {
     }
 
     /////////////////////////////////////////////////////////////
+    /// Computer Rogue Attack Action
 
     @Test
     void computerRogueShouldBeAbleToAttack() {
@@ -118,6 +121,7 @@ public class TestComputerActions {
     }
 
     /////////////////////////////////////////////////////////////
+    /// Computer Warrior Special Ability
 
     @Test
     void computerWarriorShouldBeAbleToHalveDamageFromNextIncomingAttack() {
@@ -155,6 +159,7 @@ public class TestComputerActions {
     }
 
     /////////////////////////////////////////////////////////////
+    /// Computer Mage Special Ability
 
     @Test
     void computerMageShouldBeAbleToHeal25(){
@@ -170,15 +175,16 @@ public class TestComputerActions {
     }
 
     /////////////////////////////////////////////////////////////
+    /// Computer Rogue Special Ability
 
     @Test
-    void computerRougeSpecialActionShouldDeal20Damage() {
+    void computerRogueSpecialActionShouldDeal20Damage() {
         opponent.setHealth(80);
         computerAction.useSpecial(rogue, opponent);
         assertEquals(60, opponent.getHealth());
     }
     @Test
-    void computerRougeSpecialActionShouldDealDamageThroughDefending() {
+    void computerRogueSpecialActionShouldDealDamageThroughDefending() {
         opponent.setHealth(80);
         computerAction.useSpecial(opponent, rogue);
         computerAction.useSpecial(rogue, opponent);

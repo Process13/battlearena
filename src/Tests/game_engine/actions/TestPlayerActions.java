@@ -25,6 +25,7 @@ public class TestPlayerActions {
     }
 
     /////////////////////////////////////////////////////////////
+    /// Player Warrior Attack Action
 
     @Test
     void playerWarriorShouldBeAbleToAttack() {
@@ -56,6 +57,7 @@ public class TestPlayerActions {
     }
 
     /////////////////////////////////////////////////////////////
+    /// Player Mage Attack Action
 
     @Test
     void playerMageShouldBeAbleToAttack() {
@@ -87,6 +89,7 @@ public class TestPlayerActions {
     }
 
     /////////////////////////////////////////////////////////////
+    /// Player Rogue Attack Action
 
     @Test
     void playerRogueShouldBeAbleToAttack() {
@@ -118,6 +121,7 @@ public class TestPlayerActions {
     }
 
     /////////////////////////////////////////////////////////////
+    /// Player Warrior Special Action
 
     @Test
     void playerWarriorShouldBeAbleToHalveDamageFromNextIncomingAttack() {
@@ -155,6 +159,7 @@ public class TestPlayerActions {
     }
 
     /////////////////////////////////////////////////////////////
+    /// Player Mage Special Action
 
     @Test
     void playerMageShouldBeAbleToHeal25(){
@@ -170,15 +175,16 @@ public class TestPlayerActions {
     }
 
     /////////////////////////////////////////////////////////////
+    /// Player Rogue Special Action
 
     @Test
-    void playerRougeSpecialActionShouldDeal20Damage() {
+    void playerRogueSpecialActionShouldDeal20Damage() {
         opponent.setHealth(80);
         playerAction.useSpecial(rogue, opponent);
         assertEquals(60, opponent.getHealth());
     }
     @Test
-    void playerRougeSpecialActionShouldDealDamageThroughDefending() {
+    void playerRogueSpecialActionShouldDealDamageThroughDefending() {
         opponent.setHealth(80);
         playerAction.useSpecial(opponent, rogue);
         playerAction.useSpecial(rogue, opponent);
