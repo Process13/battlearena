@@ -25,6 +25,8 @@ public abstract class GameClass implements GameClassAttributes {
         }
         if (health <= amount){
             alive = false;
+            health = 0;
+            return;
             //Character is defeated
         }
         health = health - amount;
