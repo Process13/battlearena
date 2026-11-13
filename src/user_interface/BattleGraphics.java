@@ -3,6 +3,8 @@ package user_interface;
 //Contains methods for printing out battles to the console
 
 import game_classes.GameClass;
+import game_classes.Winner;
+
 public class BattleGraphics {
     private final int BAR_LENGTH = 20;
     // Visar namn och klass på player och opponent
@@ -35,6 +37,14 @@ public class BattleGraphics {
         printHp(opponent);
         System.out.println();
 
+    }
+    public void showWinner(Winner winner, String playerName) {
+        System.out.println("--------------------------");
+        if (winner == Winner.PLAYER) {
+            System.out.println("Player " + playerName + " won!");
+        } else {
+            System.out.println("The Computer won!");
+        }
     }
 
     /*
