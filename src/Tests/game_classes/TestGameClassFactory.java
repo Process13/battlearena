@@ -18,25 +18,37 @@ public class TestGameClassFactory {
 
     @Test
     public void createGameClassShouldCreateWarrior() {
-        GameClass warrior = gameClassFactory.createGameClass(GameClassType.WARRIOR, "Orc");
+        gameClassFactory.resetGameClasses();
+        gameClassFactory.createGameClass(GameClassType.WARRIOR, "Orc");
+        gameClassFactory.getPlayer(1);
+        GameClass warrior = gameClassFactory.getPlayer(1);
         assertEquals("Orc", warrior.getCharacterName());
     }
 
+
     @Test
     public void createGameClassShouldCreateMage() {
-        GameClass mage = gameClassFactory.createGameClass(GameClassType.MAGE, "Elf");
+        gameClassFactory.resetGameClasses();
+        gameClassFactory.createGameClass(GameClassType.MAGE, "Elf");
+        gameClassFactory.getPlayer(1);
+        GameClass mage = gameClassFactory.getPlayer(1);
         assertEquals("Elf", mage.getCharacterName());
     }
 
     @Test
     public void createGameClassShouldCreateRogue() {
-        GameClass rogue = gameClassFactory.createGameClass(GameClassType.ROGUE, "Human");
+        gameClassFactory.resetGameClasses();
+        gameClassFactory.createGameClass(GameClassType.ROGUE, "Human");
+        gameClassFactory.getPlayer(1);
+        GameClass rogue = gameClassFactory.getPlayer(1);
         assertEquals("Human", rogue.getCharacterName());
     }
 
     @Test
     public void createRandomGameClassShouldReturnRandomGameClass() {
-        GameClass random = gameClassFactory.createRandomGameClass("Computer");
+        gameClassFactory.resetGameClasses();
+        gameClassFactory.createRandomGameClass("Computer");
+        GameClass random = gameClassFactory.getPlayer(1);
 
         assertTrue(random instanceof Warrior || random instanceof Mage || random instanceof Rogue);
         assertEquals("Computer", random.getCharacterName());
