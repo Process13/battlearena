@@ -15,6 +15,7 @@ public class ComputerAction implements GameActions {
         return damageDealt;
     }
     public int useSpecial(GameClass computer, GameClass opponent){
+        computer.setSpecialUsed(true);
         return computer.specialAbility(opponent);
     }
 }

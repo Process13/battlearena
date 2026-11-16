@@ -19,6 +19,7 @@ public class PlayerAction extends ComputerAction implements GameActions {
 
     @Override
     public int useSpecial(GameClass player, GameClass opponent) {
+        player.setSpecialUsed(true);
         return player.specialAbility(opponent);
     }
 }
