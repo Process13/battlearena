@@ -10,13 +10,15 @@ public class PlayerAction extends ComputerAction implements GameActions {
     private final RandomRangeCalculator damageCalculator = new RandomRangeCalculator();
 
     @Override
-    public void useAttack(GameClass player, GameClass opponent) {
+    public int useAttack(GameClass player, GameClass opponent) {
         int[] damageRange = player.getDamageRange();
-        int damageDealt = damageCalculator.getRandomNumberFromRange(damageRange[0],damageRange[1]);
-        opponent.setHealth(opponent.getHealth()-damageDealt);
+        int damageDealt = damageCalculator.getRandomNumberFromRange(damageRange[0], damageRange[1]);
+        opponent.setHealth(opponent.getHealth() - damageDealt);
+        return damageDealt;
     }
+
     @Override
-    public void useSpecial(GameClass player, GameClass opponent) {
-        player.specialAbility(opponent);
+    public int useSpecial(GameClass player, GameClass opponent) {
+        return player.specialAbility(opponent);
     }
 }

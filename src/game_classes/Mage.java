@@ -13,8 +13,10 @@ public class Mage extends GameClass {
     public int[] getDamageRange() {
         return new int[]{MIN_DAMAGE, MAX_DAMAGE};
     }
-    public void specialAbility(GameClass opponent) {
+    public int specialAbility(GameClass opponent) {
+        int healthBefore = getHealth();
         this.heal(HEAL_AMOUNT);
+        return getHealth() - healthBefore;
     }
 
     public int getMaxHealthPoints() {
