@@ -11,6 +11,7 @@ public abstract class GameClass implements GameClassAttributes {
     public GameClass(String CharacterName, GameClassType type) {
         this.CharacterName = CharacterName;
         this.type = type;
+        this.setHealth(getMaxHealthPoints());
     }
     /*
     public int attack(GameClass target){

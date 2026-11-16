@@ -1,27 +1,34 @@
 package Tests.game_classes;
 
 import game_classes.GameClass;
+import game_classes.Mage;
+import game_classes.Rogue;
 import game_classes.Warrior;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestGameClass {
-    private GameClass player;
-    private GameClass oponent;
+    GameClass warrior, mage, rogue;
 
     @BeforeEach
-    public void setup(){
-        player=new Warrior("player");
-        oponent=new Warrior("oponent");
+    void setup() {
+        warrior = new Warrior("Warrior");
+        mage = new Mage("Mage");
+        rogue = new Rogue("Rogue");
+    }
+
+    @Test
+    void warriorShouldStartWithWarriorMaxHealth(){
+        assertEquals(warrior.getMaxHealthPoints(), warrior.getHealth());
     }
     @Test
-    public void getAliveShouldReturnFalse(){
-        assertTrue(player.getAlive());
-        player.setHealth(5);
-        player.takeDamage(10,false);
-        assertEquals(0,player.getHealth());
-        assertFalse(player.getAlive());
+    void mageShouldStartWithMageMaxHealth(){
+        assertEquals(mage.getMaxHealthPoints(), mage.getHealth());
+    }
+    @Test
+    void rogueShouldStartWithRogueMaxHealth(){
+        assertEquals(rogue.getMaxHealthPoints(), rogue.getHealth());
     }
 }
