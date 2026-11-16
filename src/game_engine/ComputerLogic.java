@@ -1,26 +1,33 @@
 package game_engine;
 
-//IN:
-
 import game_classes.GameClass;
-import game_classes.Mage;
-import game_classes.Rogue;
-import game_classes.Warrior;
+import game_classes.GameClassType;
 import game_engine.actions.ComputerAction;
 
 public class ComputerLogic {
-    GameClassFactory gameClassFactory = new GameClassFactory();
-    GameClass opponent = new Warrior("opponent");
-    ComputerAction computerAction = new ComputerAction();
+    private ComputerAction computerAction = new ComputerAction();
 
-    public GameClass createComputerCharacter(){
-        return gameClassFactory.createRandomGameClass("Computer");
-    }
-
-    void computerWarrior(GameClass computer){
+    public void computerWarriorLogic(GameClass computer, GameClass opponent){
         if (!computer.isSpecialUsed()){
             computerAction.useSpecial(computer, opponent);
-            return;
+        } else {
+            computerAction.useAttack(computer, opponent);
+        }
+    }
+
+    public void computerMageLogic(GameClass computer, GameClass opponent) {
+        if (!computer.isSpecialUsed() && computer.getHealth()<=computer.getMaxHealthPoints()-25) {
+            computerAction.useSpecial(computer, opponent);
+        } else {
+            computerAction.useAttack(computer, opponent);
+        }
+    }
+
+    public void computerRogueLogic(GameClass computer, GameClass opponent) {
+        if (!computer.isSpecialUsed() && opponent.getType() != GameClassType.WARRIOR){
+            computerAction.useSpecial(computer, opponent);
+        } else if (!computer.isSpecialUsed() && opponent.getDefending()) {
+            computerAction.useSpecial(computer, opponent);
         } else {
             computerAction.useAttack(computer, opponent);
         }

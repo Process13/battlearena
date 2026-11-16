@@ -11,6 +11,7 @@ public abstract class GameClass implements GameClassAttributes {
     public GameClass(String CharacterName, GameClassType type) {
         this.CharacterName = CharacterName;
         this.type = type;
+        this.setHealth(getMaxHealthPoints());
     }
     /*
     public int attack(GameClass target){
@@ -25,6 +26,8 @@ public abstract class GameClass implements GameClassAttributes {
         }
         if (health <= amount){
             alive = false;
+            health = 0;
+            return;
             //Character is defeated
         }
         health = health - amount;
