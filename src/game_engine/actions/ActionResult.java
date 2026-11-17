@@ -4,26 +4,24 @@ import game_classes.ActionType;
 
 public class ActionResult {
     private final String actorName;
+    private final String targetName;
     private final GameActions actions;
     private final int amount;
     private final ActionType actionType;
-    private final String description;
 
-    public ActionResult(String actorName, GameActions actions, int amount, ActionType actionType, String description) {
+
+    public ActionResult(String actorName, String targetName,GameActions actions, int amount, ActionType actionType) {
         this.actorName = actorName;
+        this.targetName = targetName;
         this.actions = actions;
         this.amount = amount;
         this.actionType = actionType;
-        this.description = description;
     }
 
     public String getActorName() {
         return actorName;
     }
 
-    public String getDescription() {
-        return description;
-    }
 
     public GameActions getActions() {
         return actions;
@@ -35,5 +33,9 @@ public class ActionResult {
 
     public ActionType getActionType() {
         return  actionType;
+    }
+
+    public String getTargetName() {
+        return targetName;
     }
 }

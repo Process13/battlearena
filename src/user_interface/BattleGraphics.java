@@ -4,6 +4,7 @@ package user_interface;
 
 import game_classes.GameClass;
 import game_classes.Winner;
+import game_engine.actions.ActionResult;
 
 public class BattleGraphics {
     private final int BAR_LENGTH = 20;
@@ -17,8 +18,11 @@ public class BattleGraphics {
         System.out.println("---- Round: " + round + "----");
     }
     // Visar resultat av handling
-    public void showActionResult(){
-
+    public void showActionResult(ActionResult result) {
+    String message = switch (result.getActionType()) {
+        case ATTACK -> result.getActorName() + " Attacked " +  result.getTargetName() + " for " + result.getAmount() + " damage!";
+        case SPECIAL -> result.getActorName() + " used their special ability (" + result.getAmount() + ")" ;
+    };
     }
     //Skapar en healthbar likt #######-------
     public String hpBar(int hp, int maxhp) {
