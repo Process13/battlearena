@@ -5,6 +5,7 @@ package user_interface;
 
 //Takes input from user and sends it to BattleGraphics
 
+import game_classes.ActionType;
 import game_classes.GameClass;
 import game_classes.GameClassType;
 
@@ -41,6 +42,17 @@ public class BattleInterface {
         return gameClassTypes[choice];
 
     }
+
+    public ActionType readActionChoice() {
+        System.out.println("1. Attack");
+
+        boolean specialAvailable = !playerClass.isSpecialUsed();
+        if (specialAvailable) {
+            System.out.println("2. Special ability");
+        }
+        int choice = readInt(1, specialAvailable ? 2 : 1);
+        return choice == 1 ? ActionType.ATTACK : ActionType.SPECIAL;
+    }
     // Läser in användarens sitt val, fångar upp och skriver ut felmeddelande vid fel inmatning
     public int readInt(int min, int max) {
         while (true) {
@@ -49,7 +61,7 @@ public class BattleInterface {
 
             try{
                 int value = Integer.parseInt(input);
-                if (value < min && value > max) {
+                if (value >= min && value <= max) {
                     return value;
                 }
                 System.out.println("Please enter a number between " + min + " and " + max + ": ");
