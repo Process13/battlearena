@@ -7,7 +7,7 @@ public class Rogue extends GameClass {
     private static final int STATIC_DAMAGE = 20;
 
     public Rogue(String CharacterName) {
-        super(CharacterName, GameClassType.ROGUE);
+        super(CharacterName, GameClassType.ROGUE, SpecialTypeName.BACKSTAB);
     }
 
     public int[] getDamageRange() {

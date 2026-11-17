@@ -69,15 +69,15 @@ public class MatchEngine {
 
     }
     // performing an Action based on enum and generating printable results.
-    public ActionResult performAction(GameClass actor, GameClass target, ActionType action, GameActions actions) {
-        return switch (action) {
+    public ActionResult performAction(GameClass actor, GameClass target, ActionType actionType, GameActions actions) {
+        return switch (actionType) {
             case ATTACK -> {
                 int damage = actions.useAttack(actor, target);
-                yield new ActionResult(actor.getCharacterName(), target.getCharacterName(), actions,damage, action);
+                yield new ActionResult(actor.getCharacterName(), target.getCharacterName(), actions,damage, actionType,actor.getSpecialTypeName());
             }
             case SPECIAL -> {
                 int amount = actions.useSpecial(actor,target);
-                yield new ActionResult(actor.getCharacterName(),target.getCharacterName(), actions, amount, action);
+                yield new ActionResult(actor.getCharacterName(),target.getCharacterName(), actions, amount, actionType, actor.getSpecialTypeName());
             }
         };
     }

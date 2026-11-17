@@ -3,15 +3,17 @@ package game_classes;
 public abstract class GameClass implements GameClassAttributes {
     private final String CharacterName;
     private final GameClassType type;
+    private final SpecialTypeName specialTypeName;
     private int health;
     protected boolean defending = false;
     private boolean alive = true;
     private boolean specialUsed = false;
 
-    public GameClass(String CharacterName, GameClassType type) {
+    public GameClass(String CharacterName, GameClassType type, SpecialTypeName specialTypeName) {
         this.CharacterName = CharacterName;
         this.type = type;
         this.setHealth(getMaxHealthPoints());
+        this.specialTypeName = specialTypeName;
     }
     /*
     public int attack(GameClass target){
@@ -54,6 +56,10 @@ public abstract class GameClass implements GameClassAttributes {
 
     public int getHealth() {
         return health;
+    }
+
+    public SpecialTypeName getSpecialTypeName() {
+        return specialTypeName;
     }
 
     public void setHealth(int health) {

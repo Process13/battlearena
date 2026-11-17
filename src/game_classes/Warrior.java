@@ -6,7 +6,7 @@ public class Warrior extends GameClass {
     private static final int MIN_DAMAGE = 9;
 
     public Warrior(String CharacterName) {
-        super(CharacterName, GameClassType.WARRIOR);
+        super(CharacterName, GameClassType.WARRIOR,  SpecialTypeName.DEFEND);
     }
 
     public int[] getDamageRange() {

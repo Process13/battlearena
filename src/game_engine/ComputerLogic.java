@@ -8,15 +8,17 @@ import game_engine.actions.ComputerAction;
 public class ComputerLogic {
     private ComputerAction computerAction = new ComputerAction();
 
-   /* public ActionType chooseAction(GameClass computer, GameClass opponent){
+   public ActionType chooseAction(GameClass computer, GameClass opponent){
         if(computer.isSpecialUsed()) {
             return ActionType.ATTACK;
         }
         return switch (computer.getType()) {
-            case WARRIOR -> computerWarriorLogic(), ;
-            case MAGE -> computer
-        }
-    }*/
+            case WARRIOR -> computerWarriorLogic(computer, opponent) ;
+            case MAGE -> computerMageLogic(computer, opponent) ;
+            case ROGUE -> computerRogueLogic(computer, opponent) ;
+        };
+
+    }
 
     public void computerWarriorLogic(GameClass computer, GameClass opponent){
         if (!computer.isSpecialUsed()){
