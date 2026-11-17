@@ -18,4 +18,5 @@ public class ComputerAction implements GameActions {
         computer.setSpecialUsed(true);
         return computer.specialAbility(opponent);
     }
+
 }
