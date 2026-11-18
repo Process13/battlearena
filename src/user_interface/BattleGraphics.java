@@ -2,6 +2,7 @@ package user_interface;
 
 //Contains methods for printing out battles to the console
 
+import game_classes.ActionType;
 import game_classes.GameClass;
 import game_classes.Winner;
 import game_engine.actions.ActionResult;
@@ -24,6 +25,13 @@ public class BattleGraphics {
         case SPECIAL -> result.getActorName() + " used their special ability " + result.getSpecialType().getName() + " (" + result.getAmount() + ")";
     };
         System.out.println(message);
+    }
+    public void showActionChoices(GameClass player, boolean specialAvailable) {
+        System.out.println("Choose an action:");
+        System.out.println("1. " + ActionType.ATTACK.getDisplayName());
+        if (specialAvailable) {
+            System.out.println("2. " + ActionType.SPECIAL.getDisplayName() + " (" + player.getSpecialType().getName() + ") ");
+        }
     }
     //Skapar en healthbar likt #######-------
     public String hpBar(int hp, int maxhp) {
