@@ -15,13 +15,13 @@ public class BattleGraphics {
     }
     // Visar nummer för runda
     public void showRound(int round) {
-        System.out.println("---- Round: " + round + "----");
+        System.out.println("---- Round: " + round + " ----");
     }
     // Visar resultat av handling
     public void showActionResult(ActionResult result) {
     String message = switch (result.getActionType()) {
-        case ATTACK -> result.getActorName() + " Attacked " +  result.getTargetName() + " for " + result.getAmount() + " damage!";
-        case SPECIAL -> result.getActorName() + " used their special ability" + result.getSpecialType().getName() + " (" + result.getAmount() + ")";
+        case ATTACK -> result.getActorName() + " attacked " +  result.getTargetName() + " for " + result.getAmount() + " damage!";
+        case SPECIAL -> result.getActorName() + " used their special ability " + result.getSpecialType().getName() + " (" + result.getAmount() + ")";
     };
         System.out.println(message);
     }
