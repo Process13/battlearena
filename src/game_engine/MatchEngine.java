@@ -73,11 +73,11 @@ public class MatchEngine {
         return switch (actionType) {
             case ATTACK -> {
                 int damage = actions.useAttack(actor, target);
-                yield new ActionResult(actor.getCharacterName(), target.getCharacterName(), actions,damage, actionType,actor.getSpecialTypeName());
+                yield ActionResult.attack(actor.getCharacterName(), target.getCharacterName(), damage);
             }
             case SPECIAL -> {
                 int amount = actions.useSpecial(actor,target);
-                yield new ActionResult(actor.getCharacterName(),target.getCharacterName(), actions, amount, actionType, actor.getSpecialTypeName());
+                yield ActionResult.special(actor.getCharacterName(),target.getCharacterName(), amount, actor.getSpecialType());
             }
         };
     }

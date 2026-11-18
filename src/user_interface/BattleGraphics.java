@@ -21,8 +21,9 @@ public class BattleGraphics {
     public void showActionResult(ActionResult result) {
     String message = switch (result.getActionType()) {
         case ATTACK -> result.getActorName() + " Attacked " +  result.getTargetName() + " for " + result.getAmount() + " damage!";
-        case SPECIAL -> result.getActorName() + " used their special ability" + result.getSpecialType() + " (" + result.getAmount() + ")";
+        case SPECIAL -> result.getActorName() + " used their special ability" + result.getSpecialType().getName() + " (" + result.getAmount() + ")";
     };
+        System.out.println(message);
     }
     //Skapar en healthbar likt #######-------
     public String hpBar(int hp, int maxhp) {

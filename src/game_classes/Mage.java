@@ -7,7 +7,7 @@ public class Mage extends GameClass {
     private static final int HEAL_AMOUNT = 25;
 
     public Mage(String CharacterName) {
-        super(CharacterName, GameClassType.MAGE,  SpecialTypeName.HEAL);
+        super(CharacterName, GameClassType.MAGE);
     }
 
     public int[] getDamageRange() {
@@ -17,6 +17,10 @@ public class Mage extends GameClass {
         int healthBefore = getHealth();
         this.heal(HEAL_AMOUNT);
         return getHealth() - healthBefore;
+    }
+    @Override
+    public SpecialTypeName getSpecialType() {
+        return SpecialTypeName.HEAL;
     }
 
     public int getMaxHealthPoints() {
