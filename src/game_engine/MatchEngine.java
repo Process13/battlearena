@@ -15,50 +15,79 @@ import game_engine.actions.ComputerAction;
 import game_engine.actions.GameActions;
 import game_engine.actions.PlayerAction;
 import user_interface.BattleGraphics;
+import user_interface.BattleInterface;
 
 import javax.swing.*;
+import java.util.Scanner;
 
 
 public class MatchEngine {
     private final GameClass player;
+    private final boolean isPlayerComputer;
+    private final GameActions playerAction;
     private final GameClass opponent;
-    private final PlayerAction playerAction;
-    private final ComputerAction computerAction;
-    private final BattleGraphics graphics;
+    private final GameActions opponentAction;
+    private final boolean isOpponentComputer;
+    private final BattleGraphics graphics = new BattleGraphics();
+    private final Scanner scanner = new Scanner(System.in);
+    private final BattleInterface input = new BattleInterface(scanner);
 
     private int rounds;
 
 
-    public MatchEngine(GameClass player, GameClass opponent, PlayerAction playerAction, ComputerAction computerAction, BattleGraphics graphics) {
+//    public MatchEngine(GameClass player, GameClass opponent, BattleGraphics graphics) {
+//        this.player = player;
+//        this.opponent = opponent;
+//        this.graphics = graphics;
+//    }
+    public MatchEngine(GameClass player, GameClass opponent){
         this.player = player;
+        this.isPlayerComputer = player.isComputer();
         this.opponent = opponent;
-        this.playerAction = playerAction;
-        this.computerAction = computerAction;
-        this.graphics = graphics;
+        this.isOpponentComputer = opponent.isComputer();
 
+        if (player.isComputer()){
+            this.playerAction = new ComputerAction();
+        } else {
+            this.playerAction = new PlayerAction(input, graphics);
+        }
+
+        if (player.isComputer()){
+            this.opponentAction = new ComputerAction();
+        } else {
+            this.opponentAction = new PlayerAction(input, graphics);
+        }
     }
 
-    public Winner playMatch() {
-        graphics.showStatus(player, opponent);
+    public Winner playMatch(Boolean debug) {
+        if (!debug) {
+            graphics.showStatus(player, opponent);
+        }
         while(!matchOver()) {
             rounds++;
-            graphics.showRound(rounds);
+            if (!debug) {
+                graphics.showRound(rounds);
+            }
 
-            takeTurn(player,opponent,playerAction);
+            takeTurn(player,opponent, playerAction, debug);
             if(!matchOver()) {
-              takeTurn(opponent,player,computerAction);
+              takeTurn(opponent,player, opponentAction, debug);
             }
         }
         Winner winner = getWinner();
-        graphics.showWinner(winner, player.getCharacterName());
+        if (!debug) {
+            graphics.showWinner(winner, player.getCharacterName());
+        }
         return winner;
     }
-    private void takeTurn(GameClass actor, GameClass target, GameActions actions) {
+    private void takeTurn(GameClass actor, GameClass target, GameActions actions, boolean debug) {
             ActionType action = actions.chooseAction(actor,target);
             ActionResult result = performAction(actor, target,action, actions);
 
-            graphics.showActionResult(result);
-            graphics.showStatus(player, opponent);
+            if (!debug) {
+                graphics.showActionResult(result);
+                graphics.showStatus(player, opponent);
+            }
 
     }
     // performing an Action based on enum and generating printable results.
@@ -84,7 +113,12 @@ public class MatchEngine {
         if(!matchOver()){
             throw new IllegalStateException("Match is not over yet.");
         }
-        return player.getAlive() ?  Winner.PLAYER : Winner.COMPUTER;
+        //             \                |                /
+        //              v               v               v
+        return player.getAlive() ?  Winner.PLAYER1 : Winner.PLAYER2;
+        //                  LOOK HERE AND CHECK ME!!!!!!!!
+        //              A               A               A
+        //             /                |                \
     }
 
 
