@@ -7,6 +7,6 @@ public class Main {
         //-> Warrior wins, Mage wins, Rogue wins, averages for different values.
         //NEW CLASS IN user_interface "DebugMode"
         DebugMode debug = new DebugMode();
-        debug.runDebug(1000);
+        debug.runDebug(1000);   //Perhaps have a hidden menu option for starting debug mode
     }
 }
