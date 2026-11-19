@@ -39,7 +39,7 @@ public class TestMatchEngine {
     //skriv ut action
     @BeforeEach
     public void setup() {
-        matchEngine = new MatchEngine(player, computer, playerAction, computerAction, computerLogic, graphics,battleInterface );
+        matchEngine = new MatchEngine(player, computer, playerAction, computerAction, graphics);
 
     }
 
@@ -50,7 +50,7 @@ public class TestMatchEngine {
         player.setHealth(5);
         player.takeDamage(6, false);
 
-        matchEngine = new MatchEngine(player, computer, playerAction, computerAction, computerLogic, graphics,battleInterface );
+        matchEngine = new MatchEngine(player, computer, playerAction, computerAction, graphics);
 
 
         assertFalse(player.getAlive());
@@ -64,7 +64,7 @@ public class TestMatchEngine {
         computer.setHealth(5);
         computer.takeDamage(10, false);
 
-        matchEngine = new MatchEngine(player, computer, playerAction, computerAction, computerLogic, graphics,battleInterface );
+        matchEngine = new MatchEngine(player, computer, playerAction, computerAction, graphics);
 
         assertTrue(matchEngine.matchOver());
         assertEquals(Winner.PLAYER, matchEngine.getWinner());
@@ -77,7 +77,7 @@ public class TestMatchEngine {
         player.setHealth(5);
         player.takeDamage(10, false);
 
-        matchEngine = new MatchEngine(player, computer, playerAction, computerAction, computerLogic, graphics,battleInterface );
+        matchEngine = new MatchEngine(player, computer, playerAction, computerAction, graphics);
 
         assertTrue(matchEngine.matchOver());
         assertEquals(Winner.COMPUTER, matchEngine.getWinner());
@@ -90,9 +90,9 @@ public class TestMatchEngine {
         computer.setHealth(100);
 
 
-        MatchEngine engine = new MatchEngine(player, computer, playerAction, computerAction, computerLogic, graphics,battleInterface);
-        engine.performAction(player, computer, ActionType.ATTACK, new PlayerAction());
-        ActionResult result = matchEngine.performAction(player, computer, ActionType.ATTACK, new PlayerAction());
+        MatchEngine engine = new MatchEngine(player, computer, playerAction, computerAction, graphics);
+        engine.performAction(player, computer, ActionType.ATTACK, new PlayerAction(null));
+        ActionResult result = matchEngine.performAction(player, computer, ActionType.ATTACK, new PlayerAction(null));
 
         assertEquals(ActionType.ATTACK, result.getActionType());
         assertTrue(computer.getHealth() < 100);
@@ -104,7 +104,7 @@ public class TestMatchEngine {
         mage.setHealth(10);
         var target = new Warrior("Warrior");
 
-        ActionResult result = matchEngine.performAction(mage, target, ActionType.SPECIAL, new PlayerAction());
+        ActionResult result = matchEngine.performAction(mage, target, ActionType.SPECIAL, new PlayerAction(null));
 
         assertEquals(ActionType.SPECIAL, result.getActionType());
         assertEquals(35, mage.getHealth());
@@ -116,7 +116,7 @@ public class TestMatchEngine {
         var rogue = new Rogue("Rogue");
         var target = new Warrior("Warrior");
 
-        ActionResult result = matchEngine.performAction(rogue, target, ActionType.SPECIAL, new PlayerAction());
+        ActionResult result = matchEngine.performAction(rogue, target, ActionType.SPECIAL, new PlayerAction(null));
 
         assertEquals(ActionType.SPECIAL, result.getActionType());
         assertEquals(130, target.getHealth());
@@ -126,7 +126,7 @@ public class TestMatchEngine {
         var warrior = new Warrior("Warrior");
         var target = new Warrior("Warrior");
 
-        ActionResult result = matchEngine.performAction(warrior, target, ActionType.SPECIAL, new PlayerAction());
+        ActionResult result = matchEngine.performAction(warrior, target, ActionType.SPECIAL, new PlayerAction(null));
 
         assertEquals(ActionType.SPECIAL, result.getActionType());
         assertTrue(warrior.getDefending());

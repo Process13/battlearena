@@ -7,7 +7,7 @@ public class Rogue extends GameClass {
     private static final int STATIC_DAMAGE = 20;
 
     public Rogue(String CharacterName) {
-        super(CharacterName, GameClassType.ROGUE, SpecialTypeName.BACKSTAB);
+        super(CharacterName, GameClassType.ROGUE);
     }
 
     public int[] getDamageRange() {
@@ -17,6 +17,10 @@ public class Rogue extends GameClass {
         int healthBefore = opponent.getHealth();
         opponent.takeDamage(STATIC_DAMAGE, true);
         return healthBefore - opponent.getHealth();
+    }
+    @Override
+    public SpecialTypeName getSpecialType() {
+        return SpecialTypeName.BACKSTAB;
     }
 
     public int getMaxHealthPoints() {

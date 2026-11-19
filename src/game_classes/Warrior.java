@@ -6,7 +6,7 @@ public class Warrior extends GameClass {
     private static final int MIN_DAMAGE = 9;
 
     public Warrior(String CharacterName) {
-        super(CharacterName, GameClassType.WARRIOR,  SpecialTypeName.DEFEND);
+        super(CharacterName, GameClassType.WARRIOR);
     }
 
     public int[] getDamageRange() {
@@ -16,6 +16,10 @@ public class Warrior extends GameClass {
     public int specialAbility(GameClass opponent) {
         defending = true;
         return 0;
+    }
+    @Override
+    public SpecialTypeName getSpecialType() {
+        return SpecialTypeName.DEFEND;
     }
 
     public int getMaxHealthPoints() {
