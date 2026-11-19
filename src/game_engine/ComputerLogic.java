@@ -6,43 +6,48 @@ import game_classes.GameClassType;
 import game_engine.actions.ComputerAction;
 
 public class ComputerLogic {
-    private ComputerAction computerAction = new ComputerAction();
+    //private ComputerAction computerAction = new ComputerAction();
 
-   public ActionType chooseAction(GameClass computer, GameClass opponent){
-        if(computer.isSpecialUsed()) {
-            return ActionType.ATTACK;
-        }
+/*
+public ActionType chooseAction(GameClass computer, GameClass opponent){
+
         return switch (computer.getType()) {
             case WARRIOR -> computerWarriorLogic(computer, opponent) ;
             case MAGE -> computerMageLogic(computer, opponent) ;
             case ROGUE -> computerRogueLogic(computer, opponent) ;
         };
 
-    }
 
-    public void computerWarriorLogic(GameClass computer, GameClass opponent){
-        if (!computer.isSpecialUsed()){
+    }*/
+
+    public ActionType computerWarriorLogic(GameClass computer, GameClass opponent){
+        /*if (!computer.isSpecialUsed()){
             computerAction.useSpecial(computer, opponent);
         } else {
             computerAction.useAttack(computer, opponent);
-        }
+        }*/return computer.isSpecialUsed() ? ActionType.ATTACK:  ActionType.SPECIAL;
     }
 
-    public void computerMageLogic(GameClass computer, GameClass opponent) {
-        if (!computer.isSpecialUsed() && computer.getHealth()<=computer.getMaxHealthPoints()-25) {
+    public ActionType computerMageLogic(GameClass computer, GameClass opponent) {
+        /*if (!computer.isSpecialUsed() && computer.getHealth()<=computer.getMaxHealthPoints()-25) {
             computerAction.useSpecial(computer, opponent);
         } else {
             computerAction.useAttack(computer, opponent);
-        }
+        }*/
+        boolean canHeal = computer.getHealth() <= computer.getMaxHealthPoints() - 25;
+        return !computer.isSpecialUsed() && canHeal
+                ? ActionType.ATTACK:  ActionType.SPECIAL;
     }
 
-    public void computerRogueLogic(GameClass computer, GameClass opponent) {
-        if (!computer.isSpecialUsed() && opponent.getType() != GameClassType.WARRIOR){
+    public ActionType computerRogueLogic(GameClass computer, GameClass opponent) {
+        /*if (!computer.isSpecialUsed() && opponent.getType() != GameClassType.WARRIOR){
             computerAction.useSpecial(computer, opponent);
         } else if (!computer.isSpecialUsed() && opponent.getDefending()) {
             computerAction.useSpecial(computer, opponent);
         } else {
             computerAction.useAttack(computer, opponent);
-        }
+        }*/
+        boolean opportunity = opponent.getType() != GameClassType.WARRIOR || opponent.getDefending();
+        return !computer.isSpecialUsed() && opportunity ? ActionType.ATTACK:  ActionType.SPECIAL;
     }
 }

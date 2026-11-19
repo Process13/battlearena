@@ -5,7 +5,6 @@ package game_engine.actions;
 
 import game_classes.ActionType;
 import game_classes.GameClass;
-import game_classes.SpecialTypeName;
 import game_engine.RandomRangeCalculator;
 import user_interface.BattleGraphics;
 import user_interface.BattleInterface;

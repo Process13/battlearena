@@ -15,32 +15,26 @@ import game_engine.actions.ComputerAction;
 import game_engine.actions.GameActions;
 import game_engine.actions.PlayerAction;
 import user_interface.BattleGraphics;
-import user_interface.BattleInterface;
 
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class MatchEngine {
     private final GameClass player;
     private final GameClass opponent;
     private final PlayerAction playerAction;
     private final ComputerAction computerAction;
-    private final ComputerLogic computerLogic;
     private final BattleGraphics graphics;
-    private final BattleInterface battleInterface;
-    ;
+
     private int rounds;
 
 
-    public MatchEngine(GameClass player, GameClass opponent, PlayerAction playerAction, ComputerAction computerAction, ComputerLogic computerLogic, BattleGraphics graphics, BattleInterface battleInterface) {
+    public MatchEngine(GameClass player, GameClass opponent, PlayerAction playerAction, ComputerAction computerAction, BattleGraphics graphics) {
         this.player = player;
         this.opponent = opponent;
         this.playerAction = playerAction;
         this.computerAction = computerAction;
-        this.computerLogic = computerLogic;
         this.graphics = graphics;
-        this.battleInterface = battleInterface;
 
     }
 
@@ -50,22 +44,21 @@ public class MatchEngine {
             rounds++;
             graphics.showRound(rounds);
 
-            ActionType playerChoice = battleInterface.readActionChoice();
-            takeTurn(player,opponent,playerAction, playerChoice);
+            takeTurn(player,opponent,playerAction);
             if(!matchOver()) {
-               // ActionType computerChoice = computerLogic.chooseAction(opponent, player);
-              //  takeTurn(opponent,player,computerAction, computerChoice);
+              takeTurn(opponent,player,computerAction);
             }
         }
         Winner winner = getWinner();
         graphics.showWinner(winner, player.getCharacterName());
         return winner;
     }
-    private void takeTurn(GameClass actor, GameClass target, GameActions actions, ActionType choice) {
-            ActionResult result = performAction(actor, target,choice, actions);
+    private void takeTurn(GameClass actor, GameClass target, GameActions actions) {
+            ActionType action = actions.chooseAction(actor,target);
+            ActionResult result = performAction(actor, target,action, actions);
 
             graphics.showActionResult(result);
-            graphics.showStatus(actor, opponent);
+            graphics.showStatus(player, opponent);
 
     }
     // performing an Action based on enum and generating printable results.
