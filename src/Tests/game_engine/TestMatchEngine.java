@@ -3,6 +3,7 @@ package Tests.game_engine;
 import game_classes.*;
 
 import game_engine.ComputerLogic;
+import game_engine.GameClassFactory;
 import game_engine.MatchEngine;
 import game_engine.actions.ActionResult;
 import game_engine.actions.ComputerAction;
@@ -18,9 +19,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TestMatchEngine {
     private MatchEngine matchEngine;
-    ;
     private GameClass player;
-    private GameClass computer;
+    private GameClass opponent;
+    private GameClassFactory factory;
     private PlayerAction playerAction;
     private ComputerAction computerAction;
     private BattleGraphics graphics;
@@ -38,20 +39,18 @@ public class TestMatchEngine {
     //skriv ut action
     @BeforeEach
     public void setup() {
-        matchEngine = new MatchEngine(player, computer, playerAction, computerAction, graphics);
+        matchEngine = new MatchEngine(player, opponent);
+        factory = new GameClassFactory();
 
     }
 
     @Test
     public void matchOverShouldReturnTrueIfGetAliveIsFalse() {
-        player = new Warrior("player");
-        computer = new Warrior("computer");
+        factory.resetGameClasses();
+        factory.createGameClass(GameClassType.WARRIOR, "player");
+        player = factory.getPlayer(1);
         player.setHealth(5);
         player.takeDamage(6, false);
-
-        matchEngine = new MatchEngine(player, computer, playerAction, computerAction, graphics);
-
-
         assertFalse(player.getAlive());
         assertTrue(matchEngine.matchOver());
     }
@@ -59,40 +58,40 @@ public class TestMatchEngine {
     @Test
     public void getWinnerShouldReturnPlayerWinner() {
         player = new Warrior("Player");
-        computer = new Warrior("Computer");
-        computer.setHealth(5);
-        computer.takeDamage(10, false);
+        opponent = new Warrior("Computer");
+        opponent.setHealth(5);
+        opponent.takeDamage(10, false);
 
-        matchEngine = new MatchEngine(player, computer, playerAction, computerAction, graphics);
+        matchEngine = new MatchEngine(player, opponent);
 
 
         assertTrue(matchEngine.matchOver());
-        assertEquals(Winner.PLAYER, matchEngine.getWinner());
+        assertEquals(Winner.PLAYER1, matchEngine.getWinner());
     }
 
     @Test
     public void getWinnerShouldReturnComputerWinner() {
         player = new Warrior("Player");
-        computer = new Warrior("Computer");
+        opponent = new Warrior("Computer");
         player.setHealth(5);
         player.takeDamage(10, false);
 
-        matchEngine = new MatchEngine(player, computer, playerAction, computerAction, graphics);
+        matchEngine = new MatchEngine(player, opponent);
 
         assertTrue(matchEngine.matchOver());
-        assertEquals(Winner.COMPUTER, matchEngine.getWinner());
+        assertEquals(Winner.PLAYER2, matchEngine.getWinner());
     }
 
     @Test
     public void performAttackShouldUseCorrectAction() {
         player = new Warrior("Player");
-        computer = new Warrior("Computer");
-        computer.setHealth(100);
+        opponent = new Warrior("Computer");
+        opponent.setHealth(100);
 
-        ActionResult result = matchEngine.performAction(player, computer, ActionType.ATTACK, new PlayerAction(null, null));
+        ActionResult result = matchEngine.performAction(player, opponent, ActionType.ATTACK, new PlayerAction(null, null));
 
         assertEquals(ActionType.ATTACK, result.getActionType());
-        assertTrue(computer.getHealth() < 100 && computer.getHealth() > 86);
+        assertTrue(opponent.getHealth() < 100 && opponent.getHealth() > 86);
 
     }
 
