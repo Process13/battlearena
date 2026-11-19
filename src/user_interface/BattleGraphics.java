@@ -53,7 +53,7 @@ public class BattleGraphics {
     }
     public void showWinner(Winner winner, String playerName) {
         System.out.println("--------------------------");
-        if (winner == Winner.PLAYER) {
+        if (winner == Winner.PLAYER1) {
             System.out.println("Player " + playerName + " won!");
         } else {
             System.out.println("The Computer won!");
