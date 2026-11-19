@@ -7,6 +7,7 @@ public abstract class GameClass implements GameClassAttributes {
     protected boolean defending = false;
     private boolean alive = true;
     private boolean specialUsed = false;
+    private boolean isComputer = true;
 
     public GameClass(String CharacterName, GameClassType type) {
         this.CharacterName = CharacterName;
@@ -74,4 +75,13 @@ public abstract class GameClass implements GameClassAttributes {
     public void setSpecialUsed(boolean specialUsed) {
         this.specialUsed = specialUsed;
     }
+
+    public void setComputer(boolean computer) {
+        isComputer = computer;
+    }
+
+    public boolean isComputer() {
+        return isComputer;
+    }
 }
+
