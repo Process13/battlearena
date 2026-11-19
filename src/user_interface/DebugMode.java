@@ -31,9 +31,12 @@ public class DebugMode {
             computer1 = factory.getPlayer(1);
             computer2 = factory.getPlayer(2);
             while (computer1.getType()!=computer2.getType()) {
-                //KÖR RUNDA
+                match = new MatchEngine(computer1, computer2);
+                winner = match.playMatch(true);
+//                switch (winner){
+//                    case
+//                }
             }
-            winner = match.playMatch();
             if (computer1.getType() == GameClassType.WARRIOR && computer2.getType() == GameClassType.MAGE){
 
             }
