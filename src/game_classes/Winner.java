@@ -1,8 +1,8 @@
 package game_classes;
 
 public enum Winner {
-    PLAYER ("player"),
-    COMPUTER("computer");
+    PLAYER1 ("player 1"),
+    PLAYER2 ("player 2");
 
     private final String name;
 
