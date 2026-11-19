@@ -17,7 +17,7 @@ public class TestPlayerActions {
 
     @BeforeEach
     void setup() {
-        playerAction = new PlayerAction(null);
+        playerAction = new PlayerAction(null, null);
         warrior = new Warrior(GameClassType.WARRIOR.getClassName());
         mage = new Mage(GameClassType.MAGE.getClassName());
         rogue = new Rogue(GameClassType.ROGUE.getClassName());

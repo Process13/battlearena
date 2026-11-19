@@ -6,13 +6,12 @@ import game_engine.ComputerLogic;
 import game_engine.MatchEngine;
 import game_engine.actions.ActionResult;
 import game_engine.actions.ComputerAction;
-import game_engine.actions.GameActions;
 import game_engine.actions.PlayerAction;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import user_interface.BattleGraphics;
 import user_interface.BattleInterface;
-import user_interface.StartMenu;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -66,6 +65,7 @@ public class TestMatchEngine {
 
         matchEngine = new MatchEngine(player, computer, playerAction, computerAction, graphics);
 
+
         assertTrue(matchEngine.matchOver());
         assertEquals(Winner.PLAYER, matchEngine.getWinner());
     }
@@ -89,13 +89,11 @@ public class TestMatchEngine {
         computer = new Warrior("Computer");
         computer.setHealth(100);
 
-
-        MatchEngine engine = new MatchEngine(player, computer, playerAction, computerAction, graphics);
-        engine.performAction(player, computer, ActionType.ATTACK, new PlayerAction(null));
-        ActionResult result = matchEngine.performAction(player, computer, ActionType.ATTACK, new PlayerAction(null));
+        ActionResult result = matchEngine.performAction(player, computer, ActionType.ATTACK, new PlayerAction(null, null));
 
         assertEquals(ActionType.ATTACK, result.getActionType());
-        assertTrue(computer.getHealth() < 100);
+        assertTrue(computer.getHealth() < 100 && computer.getHealth() > 86);
+
     }
 
     @Test
@@ -104,7 +102,7 @@ public class TestMatchEngine {
         mage.setHealth(10);
         var target = new Warrior("Warrior");
 
-        ActionResult result = matchEngine.performAction(mage, target, ActionType.SPECIAL, new PlayerAction(null));
+        ActionResult result = matchEngine.performAction(mage, target, ActionType.SPECIAL, new PlayerAction(null, null));
 
         assertEquals(ActionType.SPECIAL, result.getActionType());
         assertEquals(35, mage.getHealth());
@@ -116,7 +114,7 @@ public class TestMatchEngine {
         var rogue = new Rogue("Rogue");
         var target = new Warrior("Warrior");
 
-        ActionResult result = matchEngine.performAction(rogue, target, ActionType.SPECIAL, new PlayerAction(null));
+        ActionResult result = matchEngine.performAction(rogue, target, ActionType.SPECIAL, new PlayerAction(null, null));
 
         assertEquals(ActionType.SPECIAL, result.getActionType());
         assertEquals(130, target.getHealth());
@@ -126,7 +124,7 @@ public class TestMatchEngine {
         var warrior = new Warrior("Warrior");
         var target = new Warrior("Warrior");
 
-        ActionResult result = matchEngine.performAction(warrior, target, ActionType.SPECIAL, new PlayerAction(null));
+        ActionResult result = matchEngine.performAction(warrior, target, ActionType.SPECIAL, new PlayerAction(null, null));
 
         assertEquals(ActionType.SPECIAL, result.getActionType());
         assertTrue(warrior.getDefending());
