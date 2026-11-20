@@ -2,8 +2,8 @@ package game_classes;
 
 public class Rogue extends GameClass {
     private static final int MAX_HEALTH_ROUGE = 110;
-    private static final int MAX_DAMAGE = 14;
-    private static final int MIN_DAMAGE = 9;
+    private static final int MAX_DAMAGE = 18;
+    private static final int MIN_DAMAGE = 6;
     private static final int STATIC_DAMAGE = 20;
 
     public Rogue(String CharacterName) {
