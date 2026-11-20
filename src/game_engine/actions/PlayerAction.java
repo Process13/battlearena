@@ -32,7 +32,7 @@ public class PlayerAction extends ComputerAction implements GameActions {
         player.setSpecialUsed(true);
         return player.specialAbility(opponent);
     }
-    @Override
+
     public ActionType chooseAction(GameClass player,  GameClass opponent) {
         boolean specialAvailable = !player.isSpecialUsed();
 
