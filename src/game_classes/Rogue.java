@@ -13,11 +13,14 @@ public class Rogue extends GameClass {
     public int[] getDamageRange() {
         return new int[]{MIN_DAMAGE, MAX_DAMAGE};
     }
+
     public int specialAbility(GameClass opponent) {
         int healthBefore = opponent.getHealth();
         opponent.takeDamage(STATIC_DAMAGE, true);
+        opponent.defending = false;
         return healthBefore - opponent.getHealth();
     }
+
     @Override
     public SpecialTypeName getSpecialType() {
         return SpecialTypeName.BACKSTAB;

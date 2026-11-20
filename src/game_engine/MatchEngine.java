@@ -54,8 +54,16 @@ public class MatchEngine {
         if (!debug) {
             graphics.showStatus(player, opponent);
         }
+        byte playerRoundsSinceSpecial = 0;
+        byte opponentRoundsSinceSpecial = 0;
         while (!matchOver()) {
             rounds++;
+            if (playerRoundsSinceSpecial == 3){
+                player.setSpecialUsed(false);
+            }
+            if (opponentRoundsSinceSpecial == 3){
+                opponent.setSpecialUsed(false);
+            }
             if (!debug) {
                 graphics.showRound(rounds);
             }
@@ -63,6 +71,8 @@ public class MatchEngine {
             if (!matchOver()) {
                 takeTurn(opponent, player, opponentAction);
             }
+            playerRoundsSinceSpecial++;
+            opponentRoundsSinceSpecial++;
         }
         Winner winner = getWinner();
         if (!debug) {
@@ -109,12 +119,7 @@ public class MatchEngine {
         if (!matchOver()) {
             throw new IllegalStateException("Match is not over yet.");
         }
-        //             \                |                /
-        //              v               v               v
         return player.getAlive() ? Winner.PLAYER1 : Winner.PLAYER2;
-        //                  LOOK HERE AND CHECK ME!!!!!!!!
-        //              A               A               A
-        //             /                |                \
     }
 
 
