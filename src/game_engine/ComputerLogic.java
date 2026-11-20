@@ -7,6 +7,7 @@ import game_engine.actions.ComputerAction;
 
 public class ComputerLogic {
     private ComputerAction computerAction = new ComputerAction();
+    private int logicReturnInt;
 
 
     public ActionType chooseAction(GameClass computer, GameClass opponent) {
@@ -19,34 +20,38 @@ public class ComputerLogic {
 
     public ActionType computerWarriorLogic(GameClass computer, GameClass opponent) {
         if (!computer.isSpecialUsed()) {
-            computerAction.useSpecial(computer, opponent);
+            logicReturnInt = computerAction.useSpecial(computer, opponent);
             return ActionType.SPECIAL;
         } else {
-            computerAction.useAttack(computer, opponent);
+            logicReturnInt = computerAction.useAttack(computer, opponent);
             return ActionType.ATTACK;
         }
     }
 
     public ActionType computerMageLogic(GameClass computer, GameClass opponent) {
         if (!computer.isSpecialUsed() && computer.getHealth() <= computer.getMaxHealthPoints() - 25) {
-            computerAction.useSpecial(computer, opponent);
+            logicReturnInt = computerAction.useSpecial(computer, opponent);
             return ActionType.SPECIAL;
         } else {
-            computerAction.useAttack(computer, opponent);
+            logicReturnInt = computerAction.useAttack(computer, opponent);
             return ActionType.ATTACK;
         }
     }
 
     public ActionType computerRogueLogic(GameClass computer, GameClass opponent) {
         if (!computer.isSpecialUsed() && opponent.getType() != GameClassType.WARRIOR) {
-            computerAction.useSpecial(computer, opponent);
+            logicReturnInt = computerAction.useSpecial(computer, opponent);
             return ActionType.SPECIAL;
         } else if (!computer.isSpecialUsed() && opponent.getDefending()) {
-            computerAction.useSpecial(computer, opponent);
+            logicReturnInt = computerAction.useSpecial(computer, opponent);
             return ActionType.SPECIAL;
         } else {
-            computerAction.useAttack(computer, opponent);
+            logicReturnInt = computerAction.useAttack(computer, opponent);
             return ActionType.ATTACK;
         }
+    }
+
+    public int getLogicReturnInt() {
+        return logicReturnInt;
     }
 }
