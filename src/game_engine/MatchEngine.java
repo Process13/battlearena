@@ -67,9 +67,9 @@ public class MatchEngine {
             if (!debug) {
                 graphics.showRound(rounds);
             }
-            takeTurn(player, opponent, playerAction);
+            takeTurn(player, opponent, playerAction, debug);
             if (!matchOver()) {
-                takeTurn(opponent, player, opponentAction);
+                takeTurn(opponent, player, opponentAction, debug);
             }
             playerRoundsSinceSpecial++;
             opponentRoundsSinceSpecial++;
@@ -81,12 +81,16 @@ public class MatchEngine {
         return winner;
     }
 
-    private void takeTurn(GameClass actor, GameClass target, PlayerAction actions) {
-        if (actor.isComputer()) {
+    private void takeTurn(GameClass actor, GameClass target, PlayerAction actions, boolean debug) {
+        if (debug){
             computerLogic.chooseAction(actor, target);
             return;
         }
-        ActionType action = actions.chooseAction(actor, target);
+        ActionType action;
+        if (actor.isComputer()) {
+            action = computerLogic.chooseAction(actor, target);
+        }
+        action = actions.chooseAction(actor, target);
         ActionResult result = performAction(actor, target, action, actions);
 
         graphics.showActionResult(result);
