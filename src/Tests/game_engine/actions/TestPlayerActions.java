@@ -5,8 +5,7 @@ import game_engine.actions.PlayerAction;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TestPlayerActions {
     private PlayerAction playerAction;
@@ -68,7 +67,7 @@ public class TestPlayerActions {
     @Test
     void playerMageShouldReceiveCorrectDamageRangeValues() {
         int[] damageRange = mage.getDamageRange();
-        assertEquals(10, damageRange[0]);
+        assertEquals(16, damageRange[0]);
         assertEquals(18, damageRange[1]);
     }
     @Test
@@ -81,7 +80,7 @@ public class TestPlayerActions {
                 lowest = opponent.getHealth();
             if (opponent.getHealth()>highest)
                 highest = opponent.getHealth();
-            assertTrue(opponent.getHealth() >= 42 && opponent.getHealth() <= 50);
+            assertTrue(opponent.getHealth() >= 42 && opponent.getHealth() <= 44);
         }
         System.out.println(mage.getType().getClassName() +
                 "\nMost damage taken: " + (60 - lowest) +
@@ -100,8 +99,8 @@ public class TestPlayerActions {
     @Test
     void playerRogueShouldReceiveCorrectDamageRangeValues() {
         int[] damageRange = rogue.getDamageRange();
-        assertEquals(9, damageRange[0]);
-        assertEquals(14, damageRange[1]);
+        assertEquals(6, damageRange[0]);
+        assertEquals(18, damageRange[1]);
     }
     @Test
     void playerRogueDealtDamageWithinTheCorrectRange() {
@@ -113,7 +112,7 @@ public class TestPlayerActions {
                 lowest = opponent.getHealth();
             if (opponent.getHealth()>highest)
                 highest = opponent.getHealth();
-            assertTrue(opponent.getHealth() >= 46 && opponent.getHealth() <= 51);
+            assertTrue(opponent.getHealth() >= 42 && opponent.getHealth() <= 54);
         }
         System.out.println(rogue.getType().getClassName() +
                 "\nMost damage taken: " + (60 - lowest) +
@@ -187,9 +186,16 @@ public class TestPlayerActions {
     void playerRogueSpecialActionShouldDealDamageThroughDefending() {
         opponent.setHealth(80);
         playerAction.useSpecial(opponent, rogue);
-        playerAction.useSpecial(rogue, opponent);
         assertTrue(opponent.getDefending());
+        playerAction.useSpecial(rogue, opponent);
         assertEquals(60, opponent.getHealth());
+    }
+    @Test
+    void computerRougeSpecialActionShouldRemoveDefending(){
+        playerAction.useSpecial(opponent, rogue);
+        assertTrue(opponent.getDefending());
+        playerAction.useSpecial(rogue, opponent);
+        assertFalse(opponent.getDefending());
     }
 
 }
