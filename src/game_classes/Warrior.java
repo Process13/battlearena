@@ -13,8 +13,13 @@ public class Warrior extends GameClass {
         return new int[]{MIN_DAMAGE, MAX_DAMAGE};
     }
 
-    public void specialAbility(GameClass opponent) {
+    public int specialAbility(GameClass opponent) {
         defending = true;
+        return 0;
+    }
+    @Override
+    public SpecialTypeName getSpecialType() {
+        return SpecialTypeName.DEFEND;
     }
 
     public int getMaxHealthPoints() {

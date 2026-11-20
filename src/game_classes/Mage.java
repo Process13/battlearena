@@ -1,9 +1,9 @@
 package game_classes;
 
 public class Mage extends GameClass {
-    private static final int MAX_HEALTH_MAGE = 80;
+    private static final int MAX_HEALTH_MAGE = 70;
     private static final int MAX_DAMAGE = 18;
-    private static final int MIN_DAMAGE = 10;
+    private static final int MIN_DAMAGE = 16;
     private static final int HEAL_AMOUNT = 25;
 
     public Mage(String CharacterName) {
@@ -13,8 +13,14 @@ public class Mage extends GameClass {
     public int[] getDamageRange() {
         return new int[]{MIN_DAMAGE, MAX_DAMAGE};
     }
-    public void specialAbility(GameClass opponent) {
+    public int specialAbility(GameClass opponent) {
+        int healthBefore = getHealth();
         this.heal(HEAL_AMOUNT);
+        return getHealth() - healthBefore;
+    }
+    @Override
+    public SpecialTypeName getSpecialType() {
+        return SpecialTypeName.HEAL;
     }
 
     public int getMaxHealthPoints() {

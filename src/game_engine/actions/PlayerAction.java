@@ -3,21 +3,42 @@ package game_engine.actions;
 //IN: PlayerName, GameClass
 //RUN:
 
+import game_classes.ActionType;
 import game_classes.GameClass;
 import game_engine.RandomRangeCalculator;
+import user_interface.BattleGraphics;
+import user_interface.BattleInterface;
 
 public class PlayerAction extends ComputerAction implements GameActions {
     private final RandomRangeCalculator damageCalculator = new RandomRangeCalculator();
+    private final BattleInterface input;
+    private final BattleGraphics graphics;
 
-    @Override
-    public void useAttack(GameClass player, GameClass opponent) {
-        int[] damageRange = player.getDamageRange();
-        int damageDealt = damageCalculator.getRandomNumberFromRange(damageRange[0],damageRange[1]);
-        opponent.setHealth(opponent.getHealth()-damageDealt);
+
+    public PlayerAction(BattleInterface input, BattleGraphics graphics) {
+        this.input = input;
+        this.graphics = graphics;
     }
     @Override
-    public void useSpecial(GameClass player, GameClass opponent) {
-        player.specialAbility(opponent);
+    public int useAttack(GameClass player, GameClass opponent) {
+        int[] damageRange = player.getDamageRange();
+        int damageDealt = damageCalculator.getRandomNumberFromRange(damageRange[0], damageRange[1]);
+        opponent.setHealth(opponent.getHealth() - damageDealt);
+        return damageDealt;
+    }
+
+    @Override
+    public int useSpecial(GameClass player, GameClass opponent) {
         player.setSpecialUsed(true);
+        return player.specialAbility(opponent);
+    }
+
+    public ActionType chooseAction(GameClass player,  GameClass opponent) {
+        boolean specialAvailable = !player.isSpecialUsed();
+
+        graphics.showActionChoices(player,specialAvailable);
+
+        int choice = input.readInt(1, specialAvailable ? 2 : 1);
+        return choice == 1 ? ActionType.ATTACK : ActionType.SPECIAL;
     }
 }

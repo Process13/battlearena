@@ -5,6 +5,7 @@ package user_interface;
 
 //Takes input from user and sends it to BattleGraphics
 
+
 import game_classes.GameClass;
 import game_classes.GameClassType;
 
@@ -12,14 +13,18 @@ import java.util.Scanner;
 
 public class BattleInterface {
     // Inkapsling
-    private final String playerName;
-    private final GameClass playerClass;
-    private final Scanner scanner = new Scanner(System.in);
+   /* private final String playerName;
+    private final GameClass playerClass;*/
+    private final Scanner scanner;
 
-    public BattleInterface(String playerName, GameClass playerClass) {
+    public BattleInterface(Scanner scanner) {
+        this.scanner = scanner;
+    }
+
+    /*public BattleInterface(String playerName, GameClass playerClass) {
         this.playerName = playerName;
         this.playerClass = playerClass;
-    }
+    }*/
     // Läser in användarens namn
     public String readPlayerName() {
         while (true) {
@@ -35,12 +40,13 @@ public class BattleInterface {
     public GameClassType readCharacterChoice() {
         GameClassType[] gameClassTypes = GameClassType.values();
         for (int i = 0; i < gameClassTypes.length; i++) {
-            System.out.println((i + 1) + ". " + gameClassTypes[i]);
+            System.out.println((i + 1) + ". " + gameClassTypes[i].getClassName());
         }
         int choice = readInt(1, gameClassTypes.length);
-        return gameClassTypes[choice];
+        return gameClassTypes[choice - 1];
 
     }
+
     // Läser in användarens sitt val, fångar upp och skriver ut felmeddelande vid fel inmatning
     public int readInt(int min, int max) {
         while (true) {
@@ -49,7 +55,7 @@ public class BattleInterface {
 
             try{
                 int value = Integer.parseInt(input);
-                if (value < min && value > max) {
+                if (value >= min && value <= max) {
                     return value;
                 }
                 System.out.println("Please enter a number between " + min + " and " + max + ": ");

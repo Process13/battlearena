@@ -25,17 +25,6 @@ public class StartMenu {
         System.out.println("2. " + GameClassType.MAGE.getClassName());
         System.out.println("3. " + GameClassType.ROGUE.getClassName());
     }
-    public void showWinner(Winner winner, String playerName) {
-        System.out.println(line);
-        if (winner == Winner.PLAYER)
-            {
-            System.out.println("Player " + playerName + " won!");
-            }
-        else {
-            System.out.println("The Computer won!");
-        }
-
-    }
 
 
     // Flush()
