@@ -34,8 +34,12 @@ public class BattleGraphics {
         }
     }
     //Skapar en healthbar likt #######-------
-    public String hpBar(int hp, int maxhp) {
-        int filled = (int) Math.round((double) hp / maxhp * BAR_LENGTH);
+    public String hpBar(int hp, int maxHp) {
+        if (maxHp <= 0) {
+            return "[" + "-".repeat(BAR_LENGTH) + "]";
+        }
+        int filled = (int) Math.round((double) hp / maxHp * BAR_LENGTH);
+        filled = Math.clamp(filled, 0, BAR_LENGTH);
         return "[" + "#".repeat(filled) + "-".repeat(BAR_LENGTH - filled) + "]";
     }
     //printar ut healthbar
