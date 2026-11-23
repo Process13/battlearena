@@ -31,8 +31,8 @@ public class MatchEngine {
     private final GameActions opponentActions;
 
     private byte rounds = 0;
-    byte playerRoundsSinceSpecial = 0;
-    byte opponentRoundsSinceSpecial = 0;
+    private byte playerRoundsSinceSpecial = 0;
+    private byte opponentRoundsSinceSpecial = 0;
 
 
     public MatchEngine(GameClass player, GameClass opponent) {
