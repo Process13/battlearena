@@ -4,6 +4,7 @@ package user_interface;
 
 import game_classes.ActionType;
 import game_classes.GameClass;
+import game_classes.GameClassType;
 import game_classes.Winner;
 import game_engine.actions.ActionResult;
 
@@ -45,7 +46,7 @@ public class BattleGraphics {
     //printar ut healthbar
     public void printHp(GameClass character){
         System.out.println(character.getCharacterName() + " "
-                + hpBar(character.getHealth(), character.getMaxHealthPoints()) + character.getHealth() + "/" + character.getMaxHealthPoints() + "HP");
+                + hpBar(character.getHealth(), character.getMaxHealthPoints()) + character.getHealth() + "/" + character.getMaxHealthPoints() + "HP" + " (" + character.getType().getClassName() + ")" );
     }
     // printar status (healthbars) för player och opponent
     public void showStatus(GameClass player, GameClass opponent) {
