@@ -23,31 +23,31 @@ import java.util.Scanner;
 
 public class MatchEngine {
     private final GameClass player;
-    //private final boolean isPlayerComputer;
-    private final PlayerAction playerAction;
     private final GameClass opponent;
-    private final PlayerAction opponentAction;
-    //private final boolean isOpponentComputer;
     private final BattleGraphics graphics = new BattleGraphics();
     private final Scanner scanner = new Scanner(System.in);
     private final BattleInterface input = new BattleInterface(scanner);
-    private final ComputerLogic computerLogic = new ComputerLogic();
+    private final GameActions playerActions;
+    private final GameActions opponentActions;
 
-    private int rounds = 0;
+    private byte rounds = 0;
 
 
-    //    public MatchEngine(GameClass player, GameClass opponent, BattleGraphics graphics) {
-//        this.player = player;
-//        this.opponent = opponent;
-//        this.graphics = graphics;
-//    }
     public MatchEngine(GameClass player, GameClass opponent) {
         this.player = player;
-        //this.isPlayerComputer = player.isComputer();
         this.opponent = opponent;
-        //this.isOpponentComputer = opponent.isComputer();
-        this.playerAction = new PlayerAction(input, graphics);
-        this.opponentAction = new PlayerAction(input, graphics);
+
+        if (player.isComputer()) {
+            this.playerActions = new ComputerAction();
+        }else {
+            this.playerActions = new PlayerAction(input, graphics);
+        }
+        if (opponent.isComputer()) {
+            this.opponentActions = new ComputerAction();
+        }else {
+            this.opponentActions = new PlayerAction(input, graphics);
+        }
+
     }
 
     public Winner playMatch(Boolean debug) {
@@ -67,9 +67,9 @@ public class MatchEngine {
             if (!debug) {
                 graphics.showRound(rounds);
             }
-            takeTurn(player, opponent, playerAction, debug);
+            takeTurn(player, opponent, playerActions, debug);
             if (!matchOver()) {
-                takeTurn(opponent, player, opponentAction, debug);
+                takeTurn(opponent, player, opponentActions,debug);
             }
             playerRoundsSinceSpecial++;
             opponentRoundsSinceSpecial++;
@@ -81,22 +81,13 @@ public class MatchEngine {
         return winner;
     }
 
-    private void takeTurn(GameClass actor, GameClass target, PlayerAction actions, boolean debug) {
-        if (debug){
-            computerLogic.chooseAction(actor, target);
-            return;
+    private void takeTurn(GameClass actor, GameClass target, GameActions actions,boolean debug) {
+        ActionType choice = actions.chooseAction(actor, target);
+        ActionResult result = performAction(actor, target, choice, actions);
+        if(!debug) {
+            graphics.showActionResult(result);
+            graphics.showStatus(player, opponent);
         }
-        ActionType action;
-        if (actor.isComputer()) {
-            action = computerLogic.chooseAction(actor, target);
-        }
-        action = actions.chooseAction(actor, target);
-        ActionResult result = performAction(actor, target, action, actions);
-
-        graphics.showActionResult(result);
-        graphics.showStatus(player, opponent);
-
-
     }
 
     // performing an Action based on enum and generating printable results.

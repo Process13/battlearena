@@ -1,9 +1,6 @@
 package Tests.game_engine;
 
-import game_classes.GameClass;
-import game_classes.Mage;
-import game_classes.Rogue;
-import game_classes.Warrior;
+import game_classes.*;
 import game_engine.ComputerLogic;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,16 +30,12 @@ public class TestComputerLogic {
 
     @Test
     void computerWarriorShouldUseSpecialActionIfAvailable(){
-        assertFalse(computerWarrior.isSpecialUsed());
-        computerLogic.computerWarriorLogic(computerWarrior, opponentW);
-        assertTrue(computerWarrior.isSpecialUsed());
+       assertEquals(ActionType.SPECIAL, computerLogic.computerWarriorLogic(computerWarrior, opponentW));
     }
     @Test
     void computerWarriorShouldUseAttackActionIfSpecialActionIsUnavailable(){
         computerWarrior.setSpecialUsed(true);
-        opponentW.setHealth(60);
-        computerLogic.computerWarriorLogic(computerWarrior, opponentW);
-        assertTrue(opponentW.getHealth()<60);
+        assertEquals(ActionType.ATTACK, computerLogic.computerWarriorLogic(computerWarrior, opponentW));
     }
 
     /////////////////////////////////////////////////////////////
@@ -66,19 +59,12 @@ public class TestComputerLogic {
     void computerMageShouldUseSpecialActionIfHealingWouldNotPutItAboveMaxHealth() {
         computerMage.setHealth(computerMage.getMaxHealthPoints()-25);
         assertFalse(computerMage.isSpecialUsed());
-        computerLogic.computerMageLogic(computerMage, opponentW);
-        assertEquals(computerMage.getMaxHealthPoints(), computerMage.getHealth());
-        computerMage.setHealth(5);
-        computerMage.setSpecialUsed(false);
-        computerLogic.computerMageLogic(computerMage, opponentW);
-        assertEquals(30, computerMage.getHealth());
+        assertEquals(ActionType.SPECIAL, computerLogic.computerMageLogic(computerMage, opponentW));
     }
     @Test
     void computerMageShouldUseAttackActionIfSpecialActionIsUnavailable(){
         computerMage.setSpecialUsed(true);
-        opponentW.setHealth(60);
-        computerLogic.computerMageLogic(computerMage, opponentW);
-        assertTrue(opponentW.getHealth()<60);
+        assertEquals(ActionType.ATTACK, computerLogic.computerMageLogic(computerMage, opponentW));
     }
     @Test
     void computerMageShouldUseAttackActionIfHealingWouldPutHpAboveMaxHealth() {
@@ -87,7 +73,7 @@ public class TestComputerLogic {
         opponentW.setHealth(100);
         computerLogic.computerMageLogic(computerMage, opponentW);
         assertFalse(computerMage.isSpecialUsed());
-        assertTrue(opponentW.getHealth()<100);
+        assertEquals(ActionType.ATTACK, computerLogic.computerMageLogic(computerMage, opponentW));
     }
 
     /////////////////////////////////////////////////////////////
@@ -96,25 +82,20 @@ public class TestComputerLogic {
     @Test
     void computerRogueShouldUseSpecialIfAvailableAndEnemyIsMageOrRouge() {
         computerRogue.setSpecialUsed(false);
-        computerLogic.computerRogueLogic(computerRogue, opponentM);
-        assertEquals(opponentM.getMaxHealthPoints()-20, opponentM.getHealth());
+        assertEquals(ActionType.SPECIAL, computerLogic.computerRogueLogic(computerRogue, opponentM));
         computerRogue.setSpecialUsed(false);
-        computerLogic.computerRogueLogic(computerRogue, opponentR);
-        assertEquals(opponentR.getMaxHealthPoints()-20, opponentR.getHealth());
+        assertEquals(ActionType.SPECIAL, computerLogic.computerRogueLogic(computerRogue, opponentR));
     }
     @Test
     void computerRougeShouldSaveSpecialAbilityForWhenWarriorDefends() {
         computerRogue.setSpecialUsed(false);
-        computerLogic.computerRogueLogic(computerRogue, opponentW);
         assertNotEquals(opponentW.getMaxHealthPoints()-20, opponentW.getHealth());
-        assertTrue(opponentW.getHealth() < opponentW.getMaxHealthPoints());
+        assertEquals(ActionType.ATTACK,  computerLogic.computerRogueLogic(computerRogue, opponentW));
         assertFalse(computerRogue.isSpecialUsed());
-
         opponentW.setHealth(opponentW.getMaxHealthPoints());
         opponentW.specialAbility(computerRogue);
         assertTrue(opponentW.getDefending());
         computerRogue.setSpecialUsed(false);
-        computerLogic.computerRogueLogic(computerRogue, opponentW);
-        assertEquals(opponentW.getMaxHealthPoints()-20, opponentW.getHealth());
+        assertEquals(ActionType.SPECIAL,computerLogic.computerRogueLogic(computerRogue, opponentW));
     }
 }
