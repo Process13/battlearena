@@ -21,7 +21,7 @@ public abstract class GameClass implements GameClassAttributes {
     }
 
      */
-    public void takeDamage(int amount, boolean piercing){
+    public int takeDamage(int amount, boolean piercing){
         if (defending && !piercing){
             amount = amount/2;
             defending = false;
@@ -29,11 +29,11 @@ public abstract class GameClass implements GameClassAttributes {
         if (health <= amount){
             alive = false;
             health = 0;
-            return;
+            return amount - health;
             //Character is defeated
         }
         health = health - amount;
-
+        return  amount;
     }
     public void heal(int amount){
         if (health >= getMaxHealthPoints() - amount) {

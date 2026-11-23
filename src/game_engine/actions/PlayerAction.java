@@ -23,8 +23,7 @@ public class PlayerAction extends ComputerAction implements GameActions {
     public int useAttack(GameClass player, GameClass opponent) {
         int[] damageRange = player.getDamageRange();
         int damageDealt = damageCalculator.getRandomNumberFromRange(damageRange[0], damageRange[1]);
-        opponent.takeDamage(damageDealt, false);
-        return damageDealt;
+        return opponent.takeDamage(damageDealt, false);
     }
 
     @Override
