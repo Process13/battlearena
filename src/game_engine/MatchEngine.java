@@ -31,6 +31,8 @@ public class MatchEngine {
     private final GameActions opponentActions;
 
     private byte rounds = 0;
+    byte playerRoundsSinceSpecial = 0;
+    byte opponentRoundsSinceSpecial = 0;
 
 
     public MatchEngine(GameClass player, GameClass opponent) {
@@ -54,25 +56,30 @@ public class MatchEngine {
         if (!debug) {
             graphics.showStatus(player, opponent);
         }
-        byte playerRoundsSinceSpecial = 0;
-        byte opponentRoundsSinceSpecial = 0;
+
         while (!matchOver()) {
             rounds++;
-            if (playerRoundsSinceSpecial == 3){
+            if (playerRoundsSinceSpecial >= 3){
                 player.setSpecialUsed(false);
+                playerRoundsSinceSpecial = 0;
             }
-            if (opponentRoundsSinceSpecial == 3){
+            if (opponentRoundsSinceSpecial >= 3){
                 opponent.setSpecialUsed(false);
+                opponentRoundsSinceSpecial = 0;
             }
             if (!debug) {
                 graphics.showRound(rounds);
             }
             takeTurn(player, opponent, playerActions, debug);
+            if (player.isSpecialUsed()){
+                playerRoundsSinceSpecial++;
+            }
             if (!matchOver()) {
                 takeTurn(opponent, player, opponentActions,debug);
+                if (opponent.isSpecialUsed()){
+                    opponentRoundsSinceSpecial++;
+                }
             }
-            playerRoundsSinceSpecial++;
-            opponentRoundsSinceSpecial++;
         }
         Winner winner = getWinner();
         if (!debug) {
