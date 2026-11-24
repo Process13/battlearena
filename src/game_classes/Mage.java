@@ -26,4 +26,7 @@ public class Mage extends GameClass {
     public int getMaxHealthPoints() {
         return MAX_HEALTH_MAGE;
     }
+    public int getHealAmount(){
+        return HEAL_AMOUNT;
+    }
 }
