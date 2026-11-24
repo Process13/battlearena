@@ -29,4 +29,8 @@ public class Rogue extends GameClass {
     public int getMaxHealthPoints() {
         return MAX_HEALTH_ROUGE;
     }
+
+    public int getStaticDamage() {
+        return STATIC_DAMAGE;
+    }
 }
