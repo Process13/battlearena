@@ -1,5 +1,7 @@
 package game_classes;
 
+import game_engine.Config;
+
 public abstract class GameClass implements GameClassAttributes {
     private final String CharacterName;
     private final GameClassType type;
@@ -23,7 +25,7 @@ public abstract class GameClass implements GameClassAttributes {
      */
     public int takeDamage(int amount, boolean piercing){
         if (defending && !piercing){
-            amount = amount/2;
+            amount = amount/Config.DEFENDING_DAMAGE_REDUCTION.getNumber();
             defending = false;
         }
         if (health <= amount){
@@ -66,6 +68,10 @@ public abstract class GameClass implements GameClassAttributes {
 
     public boolean getDefending() {
         return defending;
+    }
+
+    public void setDefending(boolean defending) {
+        this.defending = defending;
     }
 
     public boolean isSpecialUsed() {
