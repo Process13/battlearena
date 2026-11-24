@@ -44,6 +44,7 @@ public class DebugMode {
                         won = computer2;
                         lost = computer1;
                     }
+                    default -> System.out.println("No Winner");
                 }
                 switch (won.getType()) {
                     case WARRIOR -> {
@@ -71,6 +72,8 @@ public class DebugMode {
             factory.resetGameClasses();
         }
         LOGGER.fine("Tests complete. " + tests + " tests where run.");
+        System.out.println("Tests complete. " + tests + " tests where run.");
+        System.out.println(" wWinM:" + wWinM + " wWinR:" + wWinR + " mWinW:" + mWinW + " mWinR:" + mWinR + " rWinW:" + rWinW + " rWinM:" + rWinM);
 
     }
 }
