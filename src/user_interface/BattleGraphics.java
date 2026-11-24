@@ -49,11 +49,16 @@ public class BattleGraphics {
                 + hpBar(character.getHealth(), character.getMaxHealthPoints()) + character.getHealth() + "/" + character.getMaxHealthPoints() + "HP" + " (" + character.getType().getClassName() + ")" );
     }
     // printar status (healthbars) för player och opponent
-    public void showStatus(GameClass player, GameClass opponent) {
+    public void showStatus(GameClass player, GameClass opponent, String message1, String message2) {
         System.out.println();
         printHp(player);
+        System.out.println();
+        System.out.println(message1);
+        System.out.println(message2);
+        System.out.println();
         printHp(opponent);
         System.out.println();
+
 
     }
     public void showWinner(Winner winner, String playerName) {
