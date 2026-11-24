@@ -4,6 +4,7 @@ import game_classes.Winner;
 import game_engine.GameClassFactory;
 import game_engine.MatchEngine;
 import user_interface.*;
+
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -16,11 +17,7 @@ import java.util.Scanner;
 public class Main {
 
     static void main(String[] args) {
-
-
-
-       /*DebugMode debug = new DebugMode();
-       debug.runDebug(6000);*/
+        DebugMode debug = new DebugMode();
 
         Scanner scanner = new Scanner(System.in);
 
@@ -34,14 +31,15 @@ public class Main {
             boolean running = true;
             while (running) {
                 startMenu.showMainMenu();
-                int choice = input.readInt(1,3);
+                int choice = input.readInt(1, 4);
                 switch (choice) {
                     case 1 -> playMatch(input, graphics, factory);
                     case 2 -> startMenu.showClasses();
                     case 3 -> running = false;
+                    case 4 -> debug.runDebug(6000);
                 }
             }
-        }catch (NoSuchElementException e) {
+        } catch (NoSuchElementException e) {
             System.out.println("EOF-Command pressed");
         }
         startMenu.showGoodbyeMessage();
