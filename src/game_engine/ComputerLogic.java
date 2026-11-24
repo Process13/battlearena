@@ -1,8 +1,6 @@
 package game_engine;
 
-import game_classes.ActionType;
-import game_classes.GameClass;
-import game_classes.GameClassType;
+import game_classes.*;
 
 public class ComputerLogic {
 
@@ -23,7 +21,7 @@ public class ComputerLogic {
     }
 
     public ActionType computerMageLogic(GameClass computer, GameClass opponent) {
-        if (!computer.isSpecialUsed() && computer.getHealth() <= computer.getMaxHealthPoints() - 25) {
+        if (!computer.isSpecialUsed() && computer.getHealth() <= computer.getMaxHealthPoints() - Config.HEAL_AMOUNT.getNumber()) {
             return ActionType.SPECIAL;
         } else {
             return ActionType.ATTACK;
