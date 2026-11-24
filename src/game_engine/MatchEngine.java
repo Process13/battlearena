@@ -9,6 +9,7 @@ package game_engine;
 
 import game_classes.ActionType;
 import game_classes.GameClass;
+import game_classes.GameClassType;
 import game_classes.Winner;
 import game_engine.actions.ActionResult;
 import game_engine.actions.ComputerAction;
@@ -59,11 +60,17 @@ public class MatchEngine {
 
         while (!matchOver()) {
             rounds++;
-            if (playerRoundsSinceSpecial >= 3){
+            if (player.getType() == GameClassType.WARRIOR && playerRoundsSinceSpecial <= 2 && playerRoundsSinceSpecial != 0){
+                player.setDefending(true);
+            }
+            if (opponent.getType() == GameClassType.WARRIOR && opponentRoundsSinceSpecial <= 2 && opponentRoundsSinceSpecial != 0){
+                opponent.setDefending(true);
+            }
+            if (playerRoundsSinceSpecial >= 4){
                 player.setSpecialUsed(false);
                 playerRoundsSinceSpecial = 0;
             }
-            if (opponentRoundsSinceSpecial >= 3){
+            if (opponentRoundsSinceSpecial >= 4){
                 opponent.setSpecialUsed(false);
                 opponentRoundsSinceSpecial = 0;
             }
