@@ -2,6 +2,7 @@ package Tests.game_engine;
 
 import game_classes.*;
 import game_engine.ComputerLogic;
+import game_engine.Config;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -50,14 +51,14 @@ public class TestComputerLogic {
     }
     @Test
     void computerMageShouldNotUseSpecialActionIfHealingWouldPutHpAboveMaxHealth() {
-        computerMage.setHealth(computerMage.getMaxHealthPoints()-24);
+        computerMage.setHealth(computerMage.getMaxHealthPoints()-Config.HEAL_AMOUNT.getNumber()+1);
         assertFalse(computerMage.isSpecialUsed());
         computerLogic.computerMageLogic(computerMage, opponentW);
         assertFalse(computerMage.isSpecialUsed());
     }
     @Test
     void computerMageShouldUseSpecialActionIfHealingWouldNotPutItAboveMaxHealth() {
-        computerMage.setHealth(computerMage.getMaxHealthPoints()-25);
+        computerMage.setHealth(computerMage.getMaxHealthPoints()-Config.HEAL_AMOUNT.getNumber());
         assertFalse(computerMage.isSpecialUsed());
         assertEquals(ActionType.SPECIAL, computerLogic.computerMageLogic(computerMage, opponentW));
     }
@@ -69,7 +70,7 @@ public class TestComputerLogic {
     @Test
     void computerMageShouldUseAttackActionIfHealingWouldPutHpAboveMaxHealth() {
         computerMage.setSpecialUsed(false);
-        computerMage.setHealth(computerMage.getMaxHealthPoints()-20);
+        computerMage.setHealth(computerMage.getMaxHealthPoints()-Config.HEAL_AMOUNT.getNumber()+5);
         opponentW.setHealth(100);
         computerLogic.computerMageLogic(computerMage, opponentW);
         assertFalse(computerMage.isSpecialUsed());
