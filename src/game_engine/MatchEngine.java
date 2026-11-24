@@ -60,17 +60,17 @@ public class MatchEngine {
 
         while (!matchOver()) {
             rounds++;
-            if (player.getType() == GameClassType.WARRIOR && playerRoundsSinceSpecial <= 2 && playerRoundsSinceSpecial != 0){
+            if (player.getType() == GameClassType.WARRIOR && playerRoundsSinceSpecial <= Config.DEFENDING_TURNS_ACTIVE.getNumber() && playerRoundsSinceSpecial != 0){
                 player.setDefending(true);
             }
-            if (opponent.getType() == GameClassType.WARRIOR && opponentRoundsSinceSpecial <= 2 && opponentRoundsSinceSpecial != 0){
+            if (opponent.getType() == GameClassType.WARRIOR && opponentRoundsSinceSpecial <= Config.DEFENDING_TURNS_ACTIVE.getNumber() && opponentRoundsSinceSpecial != 0){
                 opponent.setDefending(true);
             }
-            if (playerRoundsSinceSpecial >= 4){
+            if (playerRoundsSinceSpecial >= Config.ABILITY_COOLDOWN_ROUNDS.getNumber()){
                 player.setSpecialUsed(false);
                 playerRoundsSinceSpecial = 0;
             }
-            if (opponentRoundsSinceSpecial >= 4){
+            if (opponentRoundsSinceSpecial >= Config.ABILITY_COOLDOWN_ROUNDS.getNumber()){
                 opponent.setSpecialUsed(false);
                 opponentRoundsSinceSpecial = 0;
             }
