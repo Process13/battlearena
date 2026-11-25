@@ -35,7 +35,7 @@ public class PlayerAction extends ComputerAction implements GameActions {
     public ActionType chooseAction(GameClass player,  GameClass opponent) {
         boolean specialAvailable = !player.isSpecialUsed();
 
-        graphics.showActionChoices(player,specialAvailable);
+        //graphics.showActionChoices(player,specialAvailable);
 
         int choice = input.readInt(1, specialAvailable ? 2 : 1);
         return choice == 1 ? ActionType.ATTACK : ActionType.SPECIAL;
