@@ -9,6 +9,7 @@ package game_engine;
 
 import game_classes.ActionType;
 import game_classes.GameClass;
+import game_classes.GameClassType;
 import game_classes.Winner;
 import game_engine.actions.ActionResult;
 import game_engine.actions.ComputerAction;
@@ -23,80 +24,86 @@ import java.util.Scanner;
 
 public class MatchEngine {
     private final GameClass player;
-    //private final boolean isPlayerComputer;
-    private final PlayerAction playerAction;
     private final GameClass opponent;
-    private final PlayerAction opponentAction;
-    //private final boolean isOpponentComputer;
     private final BattleGraphics graphics = new BattleGraphics();
     private final Scanner scanner = new Scanner(System.in);
     private final BattleInterface input = new BattleInterface(scanner);
-    private final ComputerLogic computerLogic = new ComputerLogic();
+    private final GameActions playerActions;
+    private final GameActions opponentActions;
 
-    private int rounds = 0;
+    private byte rounds = 0;
+    private byte playerRoundsSinceSpecial = 0;
+    private byte opponentRoundsSinceSpecial = 0;
+
+    private String message1 = "", message2 = "";
 
 
-    //    public MatchEngine(GameClass player, GameClass opponent, BattleGraphics graphics) {
-//        this.player = player;
-//        this.opponent = opponent;
-//        this.graphics = graphics;
-//    }
     public MatchEngine(GameClass player, GameClass opponent) {
         this.player = player;
-        //this.isPlayerComputer = player.isComputer();
         this.opponent = opponent;
-        //this.isOpponentComputer = opponent.isComputer();
-        this.playerAction = new PlayerAction(input, graphics);
-        this.opponentAction = new PlayerAction(input, graphics);
+
+        if (player.isComputer()) {
+            this.playerActions = new ComputerAction();
+        } else {
+            this.playerActions = new PlayerAction(input, graphics);
+        }
+        if (opponent.isComputer()) {
+            this.opponentActions = new ComputerAction();
+        } else {
+            this.opponentActions = new PlayerAction(input, graphics);
+        }
+
     }
 
     public Winner playMatch(Boolean debug) {
-        if (!debug) {
-            graphics.showStatus(player, opponent);
-        }
-        byte playerRoundsSinceSpecial = 0;
-        byte opponentRoundsSinceSpecial = 0;
+//        if (!debug) {
+//            graphics.showStatus(player, opponent);
+//        }
         while (!matchOver()) {
             rounds++;
-            if (playerRoundsSinceSpecial == 3){
-                player.setSpecialUsed(false);
-            }
-            if (opponentRoundsSinceSpecial == 3){
-                opponent.setSpecialUsed(false);
-            }
+            playerRoundsSinceSpecial = prepareRound(player, playerRoundsSinceSpecial);
+            opponentRoundsSinceSpecial = prepareRound(opponent, opponentRoundsSinceSpecial);
+
             if (!debug) {
                 graphics.showRound(rounds);
             }
-            takeTurn(player, opponent, playerAction, debug);
-            if (!matchOver()) {
-                takeTurn(opponent, player, opponentAction, debug);
+            takeTurn(player, opponent, playerActions, debug);
+            if (player.isSpecialUsed()) {
+                playerRoundsSinceSpecial++;
             }
-            playerRoundsSinceSpecial++;
-            opponentRoundsSinceSpecial++;
+            if (!matchOver()) {
+                sleep();
+                takeTurn(opponent, player, opponentActions, debug);
+                if (opponent.isSpecialUsed()) {
+                    opponentRoundsSinceSpecial++;
+                }
+            }
         }
         Winner winner = getWinner();
         if (!debug) {
-            graphics.showWinner(winner, player.getCharacterName());
+            graphics.showWinner(winner, player.getCharacterName(), player.getType().getClassName(), opponent.getType().getClassName());
         }
         return winner;
     }
 
-    private void takeTurn(GameClass actor, GameClass target, PlayerAction actions, boolean debug) {
-        if (debug){
-            computerLogic.chooseAction(actor, target);
-            return;
+    private void takeTurn(GameClass actor, GameClass target, GameActions actions, boolean debug) {
+        ActionType choice = actions.chooseAction(actor, target);
+        ActionResult result = performAction(actor, target, choice, actions);
+        if (!debug) {
+            graphics.showActionResult(result);
+            graphics.showStatus(player, opponent, message1, message2);
         }
-        ActionType action;
-        if (actor.isComputer()) {
-            action = computerLogic.chooseAction(actor, target);
+    }
+
+    private byte prepareRound(GameClass actor, byte roundsSinceSpecial) {
+        if (actor.getType() == GameClassType.WARRIOR && playerRoundsSinceSpecial <= Config.DEFENDING_TURNS_ACTIVE.getNumber() && playerRoundsSinceSpecial != 0) {
+            actor.setDefending(true);
         }
-        action = actions.chooseAction(actor, target);
-        ActionResult result = performAction(actor, target, action, actions);
-
-        graphics.showActionResult(result);
-        graphics.showStatus(player, opponent);
-
-
+        if (roundsSinceSpecial >= Config.ABILITY_COOLDOWN_ROUNDS.getNumber()) {
+            actor.setSpecialUsed(false);
+            return 0;
+        }
+        return roundsSinceSpecial;
     }
 
     // performing an Action based on enum and generating printable results.
@@ -124,6 +131,14 @@ public class MatchEngine {
             throw new IllegalStateException("Match is not over yet.");
         }
         return player.getAlive() ? Winner.PLAYER1 : Winner.PLAYER2;
+    }
+    public void sleep() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new IllegalStateException("Match has been interrupted!");
+        }
     }
 
 

@@ -13,18 +13,12 @@ import java.util.Scanner;
 
 public class BattleInterface {
     // Inkapsling
-   /* private final String playerName;
-    private final GameClass playerClass;*/
     private final Scanner scanner;
 
     public BattleInterface(Scanner scanner) {
         this.scanner = scanner;
     }
 
-    /*public BattleInterface(String playerName, GameClass playerClass) {
-        this.playerName = playerName;
-        this.playerClass = playerClass;
-    }*/
     // Läser in användarens namn
     public String readPlayerName() {
         while (true) {
@@ -58,8 +52,9 @@ public class BattleInterface {
                 if (value >= min && value <= max) {
                     return value;
                 }
-                System.out.println("Please enter a number between " + min + " and " + max + ": ");
+                System.out.println("Incorrect input, try again");
             }catch (NumberFormatException e){
+
                 System.out.println("Thats not a valid number! Try again!");
             }
         }

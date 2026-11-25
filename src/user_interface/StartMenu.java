@@ -1,15 +1,15 @@
 package user_interface;
 
 import game_classes.GameClassType;
+import game_classes.SpecialTypeName;
 import game_classes.Winner;
 
 public class StartMenu {
-    private final String line = "--------------------------";
 
     public void showWelcomeMessage() {
-        System.out.println(line);
-        System.out.println("       BATTLE ARENA       ");
-        System.out.println(line);
+        printLine();
+        System.out.println("            BATTLE ARENA            ");
+        printLine();
     }
     public void showMainMenu() {
         System.out.println("1. Play");
@@ -21,11 +21,15 @@ public class StartMenu {
 
     }
     public void showClasses() {
-        System.out.println("1. " + GameClassType.WARRIOR.getClassName());
-        System.out.println("2. " + GameClassType.MAGE.getClassName());
-        System.out.println("3. " + GameClassType.ROGUE.getClassName());
+        printLine();
+        System.out.println("1. [" + GameClassType.WARRIOR.getClassName() + "] Special ability: " + SpecialTypeName.DEFEND.getName());
+        System.out.println("2. [" + GameClassType.MAGE.getClassName() + "] Special ability: " + SpecialTypeName.HEAL.getName());
+        System.out.println("3. [" + GameClassType.ROGUE.getClassName() +  "] Special ability: " + SpecialTypeName.BACKSTAB.getName());
+        printLine();
     }
-
+    public void printLine() {
+        System.out.println("-------------------------------------");
+    }
 
     // Flush()
     // 1. Start

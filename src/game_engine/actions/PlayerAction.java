@@ -23,8 +23,7 @@ public class PlayerAction extends ComputerAction implements GameActions {
     public int useAttack(GameClass player, GameClass opponent) {
         int[] damageRange = player.getDamageRange();
         int damageDealt = damageCalculator.getRandomNumberFromRange(damageRange[0], damageRange[1]);
-        opponent.setHealth(opponent.getHealth() - damageDealt);
-        return damageDealt;
+        return opponent.takeDamage(damageDealt, false);
     }
 
     @Override
@@ -32,7 +31,7 @@ public class PlayerAction extends ComputerAction implements GameActions {
         player.setSpecialUsed(true);
         return player.specialAbility(opponent);
     }
-
+    @Override
     public ActionType chooseAction(GameClass player,  GameClass opponent) {
         boolean specialAvailable = !player.isSpecialUsed();
 

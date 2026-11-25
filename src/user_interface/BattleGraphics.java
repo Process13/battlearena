@@ -8,7 +8,7 @@ import game_classes.Winner;
 import game_engine.actions.ActionResult;
 
 public class BattleGraphics {
-    private final int BAR_LENGTH = 20;
+
     // Visar namn och klass på player och opponent
     public void showMatchStart(GameClass player, GameClass opponent) {
         System.out.println(player.getCharacterName() + " (" + player.getType().getClassName() + ")" +
@@ -27,37 +27,50 @@ public class BattleGraphics {
         System.out.println(message);
     }
     public void showActionChoices(GameClass player, boolean specialAvailable) {
-        System.out.println("Choose an action:");
+        System.out.println("\nChoose an action:");
         System.out.println("1. " + ActionType.ATTACK.getDisplayName());
         if (specialAvailable) {
             System.out.println("2. " + ActionType.SPECIAL.getDisplayName() + " (" + player.getSpecialType().getName() + ") ");
         }
     }
     //Skapar en healthbar likt #######-------
-    public String hpBar(int hp, int maxhp) {
-        int filled = (int) Math.round((double) hp / maxhp * BAR_LENGTH);
+    public String hpBar(int hp, int maxHp) {
+        int BAR_LENGTH = 20;
+        if (maxHp <= 0) {
+            return "[" + "-".repeat(BAR_LENGTH) + "]";
+        }
+        int filled = (int) Math.round((double) hp / maxHp * BAR_LENGTH);
+        filled = Math.clamp(filled, 0, BAR_LENGTH);
         return "[" + "#".repeat(filled) + "-".repeat(BAR_LENGTH - filled) + "]";
     }
     //printar ut healthbar
     public void printHp(GameClass character){
         System.out.println(character.getCharacterName() + " "
-                + hpBar(character.getHealth(), character.getMaxHealthPoints()) + character.getHealth() + "/" + character.getMaxHealthPoints() + "HP");
+                + hpBar(character.getHealth(), character.getMaxHealthPoints()) + character.getHealth() + "/" + character.getMaxHealthPoints() + "HP" + " (" + character.getType().getClassName() + ")" );
     }
     // printar status (healthbars) för player och opponent
-    public void showStatus(GameClass player, GameClass opponent) {
+    public void showStatus(GameClass player, GameClass opponent, String message1, String message2) {
         System.out.println();
         printHp(player);
+        System.out.println();
+        System.out.println(message1);
+        System.out.println(message2);
+        System.out.println();
         printHp(opponent);
         System.out.println();
 
+
     }
-    public void showWinner(Winner winner, String playerName) {
-        System.out.println("--------------------------");
+    public void showWinner(Winner winner, String playerName, String playerClassType, String opponentClassType) {
         if (winner == Winner.PLAYER1) {
-            System.out.println("Player " + playerName + " won!");
+            System.out.println("Player " + playerName + " (" + playerClassType + ") won!");
         } else {
-            System.out.println("The Computer won!");
+            System.out.println("The computer" + " (" + opponentClassType + ") won!");
         }
+    }
+
+    public void clearTerminal () {
+        System.out.println("\n".repeat(80));
     }
 
     /*

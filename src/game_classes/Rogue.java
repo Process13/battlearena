@@ -17,7 +17,6 @@ public class Rogue extends GameClass {
     public int specialAbility(GameClass opponent) {
         int healthBefore = opponent.getHealth();
         opponent.takeDamage(STATIC_DAMAGE, true);
-        opponent.defending = false;
         return healthBefore - opponent.getHealth();
     }
 
@@ -28,5 +27,9 @@ public class Rogue extends GameClass {
 
     public int getMaxHealthPoints() {
         return MAX_HEALTH_ROUGE;
+    }
+
+    public int getStaticDamage() {
+        return STATIC_DAMAGE;
     }
 }
