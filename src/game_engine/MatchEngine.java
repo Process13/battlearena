@@ -42,12 +42,12 @@ public class MatchEngine {
 
         if (player.isComputer()) {
             this.playerActions = new ComputerAction();
-        }else {
+        } else {
             this.playerActions = new PlayerAction(input, graphics);
         }
         if (opponent.isComputer()) {
             this.opponentActions = new ComputerAction();
-        }else {
+        } else {
             this.opponentActions = new PlayerAction(input, graphics);
         }
 
@@ -57,51 +57,51 @@ public class MatchEngine {
         if (!debug) {
             graphics.showStatus(player, opponent);
         }
-
         while (!matchOver()) {
             rounds++;
-            if (player.getType() == GameClassType.WARRIOR && playerRoundsSinceSpecial <= Config.DEFENDING_TURNS_ACTIVE.getNumber() && playerRoundsSinceSpecial != 0){
-                player.setDefending(true);
-            }
-            if (opponent.getType() == GameClassType.WARRIOR && opponentRoundsSinceSpecial <= Config.DEFENDING_TURNS_ACTIVE.getNumber() && opponentRoundsSinceSpecial != 0){
-                opponent.setDefending(true);
-            }
-            if (playerRoundsSinceSpecial >= Config.ABILITY_COOLDOWN_ROUNDS.getNumber()){
-                player.setSpecialUsed(false);
-                playerRoundsSinceSpecial = 0;
-            }
-            if (opponentRoundsSinceSpecial >= Config.ABILITY_COOLDOWN_ROUNDS.getNumber()){
-                opponent.setSpecialUsed(false);
-                opponentRoundsSinceSpecial = 0;
-            }
+            playerRoundsSinceSpecial = prepareRound(player, playerRoundsSinceSpecial);
+            opponentRoundsSinceSpecial = prepareRound(opponent, opponentRoundsSinceSpecial);
+
             if (!debug) {
                 graphics.showRound(rounds);
             }
             takeTurn(player, opponent, playerActions, debug);
-            if (player.isSpecialUsed()){
+            if (player.isSpecialUsed()) {
                 playerRoundsSinceSpecial++;
             }
             if (!matchOver()) {
-                takeTurn(opponent, player, opponentActions,debug);
-                if (opponent.isSpecialUsed()){
+                sleep();
+                takeTurn(opponent, player, opponentActions, debug);
+                if (opponent.isSpecialUsed()) {
                     opponentRoundsSinceSpecial++;
                 }
             }
         }
         Winner winner = getWinner();
         if (!debug) {
-            graphics.showWinner(winner, player.getCharacterName());
+            graphics.showWinner(winner, player.getCharacterName(), player.getType().getClassName(), opponent.getType().getClassName());
         }
         return winner;
     }
 
-    private void takeTurn(GameClass actor, GameClass target, GameActions actions,boolean debug) {
+    private void takeTurn(GameClass actor, GameClass target, GameActions actions, boolean debug) {
         ActionType choice = actions.chooseAction(actor, target);
         ActionResult result = performAction(actor, target, choice, actions);
-        if(!debug) {
+        if (!debug) {
             graphics.showActionResult(result);
             graphics.showStatus(player, opponent);
         }
+    }
+
+    private byte prepareRound(GameClass actor, byte roundsSinceSpecial) {
+        if (actor.getType() == GameClassType.WARRIOR && playerRoundsSinceSpecial <= Config.DEFENDING_TURNS_ACTIVE.getNumber() && playerRoundsSinceSpecial != 0) {
+            actor.setDefending(true);
+        }
+        if (roundsSinceSpecial >= Config.ABILITY_COOLDOWN_ROUNDS.getNumber()) {
+            actor.setSpecialUsed(false);
+            return 0;
+        }
+        return roundsSinceSpecial;
     }
 
     // performing an Action based on enum and generating printable results.
@@ -129,6 +129,14 @@ public class MatchEngine {
             throw new IllegalStateException("Match is not over yet.");
         }
         return player.getAlive() ? Winner.PLAYER1 : Winner.PLAYER2;
+    }
+    public void sleep() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new IllegalStateException("Match has been interrupted!");
+        }
     }
 
 
