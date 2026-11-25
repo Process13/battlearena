@@ -19,6 +19,7 @@ import user_interface.BattleGraphics;
 import user_interface.BattleInterface;
 
 import javax.swing.*;
+import java.io.IOException;
 import java.util.Scanner;
 
 
@@ -56,28 +57,45 @@ public class MatchEngine {
     }
 
     public Winner playMatch(Boolean debug) {
-//        if (!debug) {
-//            graphics.showStatus(player, opponent);
-//        }
+        if (!debug) {
+            waitForEnterKey();
+            graphics.clearTerminal();
+        }
         while (!matchOver()) {
             rounds++;
             playerRoundsSinceSpecial = prepareRound(player, playerRoundsSinceSpecial);
             opponentRoundsSinceSpecial = prepareRound(opponent, opponentRoundsSinceSpecial);
 
             if (!debug) {
+                graphics.clearTerminal();
                 graphics.showRound(rounds);
+                graphics.showStatus(player, opponent, message1, message2);
+                waitForEnterKey();
             }
-            takeTurn(player, opponent, playerActions, debug);
+            message1 = takeTurn(player, opponent, playerActions, debug);
             if (player.isSpecialUsed()) {
                 playerRoundsSinceSpecial++;
             }
             if (!matchOver()) {
-                sleep();
-                takeTurn(opponent, player, opponentActions, debug);
+                if (!debug){
+                    graphics.clearTerminal();
+                    graphics.showRound(rounds);
+                    graphics.showStatus(player, opponent, message1, message2);
+                    waitForEnterKey();
+                }
+                message2 = takeTurn(opponent, player, opponentActions, debug);
                 if (opponent.isSpecialUsed()) {
                     opponentRoundsSinceSpecial++;
                 }
+                if (!debug){
+                    graphics.clearTerminal();
+                    graphics.showRound(rounds);
+                    graphics.showStatus(player, opponent, message1, message2);
+                    waitForEnterKey();
+                }
             }
+            message1 = "";
+            message2 = "";
         }
         Winner winner = getWinner();
         if (!debug) {
@@ -86,12 +104,18 @@ public class MatchEngine {
         return winner;
     }
 
-    private void takeTurn(GameClass actor, GameClass target, GameActions actions, boolean debug) {
+    private String takeTurn(GameClass actor, GameClass target, GameActions actions, boolean debug) {
+        if (!actor.isComputer()) {
+            graphics.showActionChoices(actor, !actor.isSpecialUsed());
+            graphics.showRound(rounds);
+            graphics.showStatus(actor, target, message1, message2);
+        }
         ActionType choice = actions.chooseAction(actor, target);
         ActionResult result = performAction(actor, target, choice, actions);
         if (!debug) {
-            graphics.showActionResult(result);
-            graphics.showStatus(player, opponent, message1, message2);
+            return graphics.showActionResult(result);
+        } else {
+            return "";
         }
     }
 
@@ -134,10 +158,20 @@ public class MatchEngine {
     }
     public void sleep() {
         try {
-            Thread.sleep(1000);
+            Thread.sleep(500);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             throw new IllegalStateException("Match has been interrupted!");
+        }
+    }
+    public void waitForEnterKey() {
+        try {
+            while (System.in.available() == 0) {
+                sleep();
+            }
+            sleep();
+        } catch (IOException e){
+            System.out.println("Error: " + e);
         }
     }
 
