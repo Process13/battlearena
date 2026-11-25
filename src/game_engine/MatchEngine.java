@@ -35,6 +35,8 @@ public class MatchEngine {
     private byte playerRoundsSinceSpecial = 0;
     private byte opponentRoundsSinceSpecial = 0;
 
+    private String message1 = "", message2 = "";
+
 
     public MatchEngine(GameClass player, GameClass opponent) {
         this.player = player;
@@ -54,9 +56,9 @@ public class MatchEngine {
     }
 
     public Winner playMatch(Boolean debug) {
-        if (!debug) {
-            graphics.showStatus(player, opponent);
-        }
+//        if (!debug) {
+//            graphics.showStatus(player, opponent);
+//        }
         while (!matchOver()) {
             rounds++;
             playerRoundsSinceSpecial = prepareRound(player, playerRoundsSinceSpecial);
@@ -89,7 +91,7 @@ public class MatchEngine {
         ActionResult result = performAction(actor, target, choice, actions);
         if (!debug) {
             graphics.showActionResult(result);
-            graphics.showStatus(player, opponent);
+            graphics.showStatus(player, opponent, message1, message2);
         }
     }
 
