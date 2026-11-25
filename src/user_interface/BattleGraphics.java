@@ -4,12 +4,11 @@ package user_interface;
 
 import game_classes.ActionType;
 import game_classes.GameClass;
-import game_classes.GameClassType;
 import game_classes.Winner;
 import game_engine.actions.ActionResult;
 
 public class BattleGraphics {
-    private final int BAR_LENGTH = 20;
+
     // Visar namn och klass på player och opponent
     public void showMatchStart(GameClass player, GameClass opponent) {
         System.out.println(player.getCharacterName() + " (" + player.getType().getClassName() + ")" +
@@ -28,7 +27,7 @@ public class BattleGraphics {
         System.out.println(message);
     }
     public void showActionChoices(GameClass player, boolean specialAvailable) {
-        System.out.println("Choose an action:");
+        System.out.println("\nChoose an action:");
         System.out.println("1. " + ActionType.ATTACK.getDisplayName());
         if (specialAvailable) {
             System.out.println("2. " + ActionType.SPECIAL.getDisplayName() + " (" + player.getSpecialType().getName() + ") ");
@@ -36,6 +35,7 @@ public class BattleGraphics {
     }
     //Skapar en healthbar likt #######-------
     public String hpBar(int hp, int maxHp) {
+        int BAR_LENGTH = 20;
         if (maxHp <= 0) {
             return "[" + "-".repeat(BAR_LENGTH) + "]";
         }
@@ -61,13 +61,16 @@ public class BattleGraphics {
 
 
     }
-    public void showWinner(Winner winner, String playerName) {
-        System.out.println("--------------------------");
+    public void showWinner(Winner winner, String playerName, String playerClassType, String opponentClassType) {
         if (winner == Winner.PLAYER1) {
-            System.out.println("Player " + playerName + " won!");
+            System.out.println("Player " + playerName + " (" + playerClassType + ") won!");
         } else {
-            System.out.println("The Computer won!");
+            System.out.println("The computer" + " (" + opponentClassType + ") won!");
         }
+    }
+
+    public void clearTerminal () {
+        System.out.println("\n".repeat(80));
     }
 
     /*
