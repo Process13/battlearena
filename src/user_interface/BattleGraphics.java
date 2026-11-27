@@ -6,6 +6,9 @@ import game_classes.ActionType;
 import game_classes.GameClass;
 import game_classes.Winner;
 import game_engine.actions.ActionResult;
+import server_client.Client;
+import java.io.IOException;
+import java.util.List;
 
 public class BattleGraphics {
 
@@ -61,12 +64,29 @@ public class BattleGraphics {
 
 
     }
-    public void showWinner(Winner winner, String playerName, String playerClassType, String opponentClassType) {
-        if (winner == Winner.PLAYER1) {
-            System.out.println("Player " + playerName + " (" + playerClassType + ") won!");
-        } else {
-            System.out.println("The computer" + " (" + opponentClassType + ") won!");
+    public String formatWinner(Winner winner, String playerName, String playerClassType, String opponentClassType) {
+        if(winner == Winner.PLAYER1) {
+            return "Player " + playerName + " (" + playerClassType + ") won against the computer (" + opponentClassType + ")" ;
         }
+        return "The computer" + " (" + opponentClassType + ") won against the player " + playerName + " (" + playerClassType + ")";
+
+
+    }
+    public void showWinner(Winner winner, String playerName, String playerClassType, String opponentClassType) {
+        System.out.println(formatWinner(winner, playerName, playerClassType, opponentClassType));
+    }
+    public void showHistory(Client client) throws IOException {
+        List<String> history = client.receiveHistory();
+
+        System.out.println("\n--- Match History ---");
+        if(history.isEmpty()) {
+            System.out.println("No history found!");
+            return;
+        }
+        for (int i =  0; i < history.size(); i++) {
+            System.out.println((i + 1) + ". " + history.get(i));
+        }
+        System.out.println("--------------------------------\n");
     }
 
     public void clearTerminal () {

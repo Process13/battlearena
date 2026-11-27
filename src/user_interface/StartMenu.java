@@ -14,7 +14,8 @@ public class StartMenu {
     public void showMainMenu() {
         System.out.println("1. Play");
         System.out.println("2. Show classes");
-        System.out.println("3. Quit");
+        System.out.println("3. History");
+        System.out.println("4. Quit");
     }
     public void showGoodbyeMessage() {
         System.out.println("Goodbye!");
