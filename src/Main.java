@@ -4,7 +4,9 @@ import game_classes.Winner;
 import game_engine.GameClassFactory;
 import game_engine.MatchEngine;
 import user_interface.*;
+import server_client.*;
 
+import java.io.IOException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -18,34 +20,37 @@ public class Main {
 
     static void main(String[] args) {
         DebugMode debug = new DebugMode();
-
         Scanner scanner = new Scanner(System.in);
-
         BattleGraphics graphics = new BattleGraphics();
         StartMenu startMenu = new StartMenu();
         BattleInterface input = new BattleInterface(scanner);
         GameClassFactory factory = new GameClassFactory();
+        Server server = new Server();
+        Client client = new Client();
 
+        server.start();
         startMenu.showWelcomeMessage();
         try {
+
             boolean running = true;
             while (running) {
                 startMenu.showMainMenu();
-                int choice = input.readInt(1, 4);
+                int choice = input.readInt(1, 5);
                 switch (choice) {
-                    case 1 -> playMatch(input, graphics, factory);
+                    case 1 -> playMatch(input, graphics, factory, client);
                     case 2 -> startMenu.showClasses();
-                    case 3 -> running = false;
-                    case 4 -> debug.runDebug(6000);
+                    case 3 -> graphics.showHistory(client);
+                    case 4 -> running = false;
+                    case 5 -> debug.runDebug(6000);
                 }
             }
-        } catch (NoSuchElementException e) {
+        } catch (NoSuchElementException | IOException e) {
             System.out.println("EOF-Command pressed");
         }
         startMenu.showGoodbyeMessage();
     }
 
-    private static void playMatch(BattleInterface input, BattleGraphics graphics, GameClassFactory factory) {
+    private static void playMatch(BattleInterface input, BattleGraphics graphics, GameClassFactory factory, Client client) throws IOException {
         String name = input.readPlayerName();
         GameClassType type = input.readCharacterChoice();
 
@@ -61,5 +66,8 @@ public class Main {
 
         MatchEngine match = new MatchEngine(player, opponent);
         Winner winner = match.playMatch(false);
+        String result = graphics.formatWinner(winner,player.getCharacterName(), player.getType().getClassName(), opponent.getType().getClassName());
+        client.sendResult(result);
+
     }
 }
