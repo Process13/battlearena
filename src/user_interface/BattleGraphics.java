@@ -17,25 +17,29 @@ public class BattleGraphics {
         System.out.println(player.getCharacterName() + " (" + player.getType().getClassName() + ")" +
                 " VS " + opponent.getCharacterName() + " (" + opponent.getType().getClassName() + ")");
     }
+
     // Visar nummer för runda
     public void showRound(int round) {
         System.out.println("---- Round: " + round + " ----");
     }
+
     // Visar resultat av handling
-    public void showActionResult(ActionResult result) {
-    String message = switch (result.getActionType()) {
-        case ATTACK -> result.getActorName() + " attacked " +  result.getTargetName() + " for " + result.getAmount() + " damage!";
-        case SPECIAL -> result.getActorName() + " used their special ability " + result.getSpecialType().getName() + " (" + result.getAmount() + ")";
-    };
-        System.out.println(message);
+    public String showActionResult(ActionResult result) {
+        return switch (result.getActionType()) {
+            case ATTACK -> result.getActorName() + " attacked " + result.getTargetName() + " for " + result.getAmount() + " damage!";
+            case SPECIAL -> result.getActorName() + " used their special ability " + result.getSpecialType().getName() + " (" + result.getAmount() + ")";
+        };
     }
+
     public void showActionChoices(GameClass player, boolean specialAvailable) {
+        clearTerminal();
         System.out.println("\nChoose an action:");
         System.out.println("1. " + ActionType.ATTACK.getDisplayName());
         if (specialAvailable) {
             System.out.println("2. " + ActionType.SPECIAL.getDisplayName() + " (" + player.getSpecialType().getName() + ") ");
         }
     }
+
     //Skapar en healthbar likt #######-------
     public String hpBar(int hp, int maxHp) {
         int BAR_LENGTH = 20;
@@ -46,11 +50,13 @@ public class BattleGraphics {
         filled = Math.clamp(filled, 0, BAR_LENGTH);
         return "[" + "#".repeat(filled) + "-".repeat(BAR_LENGTH - filled) + "]";
     }
+
     //printar ut healthbar
-    public void printHp(GameClass character){
+    public void printHp(GameClass character) {
         System.out.println(character.getCharacterName() + " "
-                + hpBar(character.getHealth(), character.getMaxHealthPoints()) + character.getHealth() + "/" + character.getMaxHealthPoints() + "HP" + " (" + character.getType().getClassName() + ")" );
+                + hpBar(character.getHealth(), character.getMaxHealthPoints()) + character.getHealth() + "/" + character.getMaxHealthPoints() + "HP" + " (" + character.getType().getClassName() + ")");
     }
+
     // printar status (healthbars) för player och opponent
     public void showStatus(GameClass player, GameClass opponent, String message1, String message2) {
         System.out.println();
@@ -89,7 +95,7 @@ public class BattleGraphics {
         System.out.println("--------------------------------\n");
     }
 
-    public void clearTerminal () {
+    public void clearTerminal() {
         System.out.println("\n".repeat(80));
     }
 
