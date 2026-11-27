@@ -72,7 +72,9 @@ public class MatchEngine {
                 playerRoundsSinceSpecial++;
             }
             if (!matchOver()) {
-                sleep();
+                if(!debug) {
+                    sleep();
+                }
                 takeTurn(opponent, player, opponentActions, debug);
                 if (opponent.isSpecialUsed()) {
                     opponentRoundsSinceSpecial++;
