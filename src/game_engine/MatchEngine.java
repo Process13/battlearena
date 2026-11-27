@@ -20,6 +20,7 @@ import user_interface.BattleInterface;
 
 import javax.swing.*;
 import java.io.IOException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 
@@ -66,12 +67,6 @@ public class MatchEngine {
             playerRoundsSinceSpecial = prepareRound(player, playerRoundsSinceSpecial);
             opponentRoundsSinceSpecial = prepareRound(opponent, opponentRoundsSinceSpecial);
 
-            if (!debug) {
-                graphics.clearTerminal();
-                graphics.showRound(rounds);
-                graphics.showStatus(player, opponent, message1, message2);
-                waitForEnterKey();
-            }
             message1 = takeTurn(player, opponent, playerActions, debug);
             if (player.isSpecialUsed()) {
                 playerRoundsSinceSpecial++;
@@ -164,13 +159,11 @@ public class MatchEngine {
             throw new IllegalStateException("Match has been interrupted!");
         }
     }
-    public void waitForEnterKey() {
+    public void waitForEnterKey() throws NoSuchElementException {
         try {
-            while (System.in.available() == 0) {
-                sleep();
-            }
-            sleep();
-        } catch (IOException e){
+            System.out.println("Press Enter key to continue...");
+            scanner.nextLine();
+        } catch (IllegalStateException e){
             System.out.println("Error: " + e);
         }
     }
